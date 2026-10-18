@@ -367,6 +367,205 @@
   padding: 0 4px;
 }
 
+/* Contact Us Section on Register Page */
+.reg-contact-section {
+  margin-top: 48px;
+  padding-top: 36px;
+  border-top: 4px solid var(--line);
+}
+
+.reg-contact-head {
+  margin-bottom: 24px;
+}
+
+.reg-contact-intro {
+  color: var(--dim);
+  font-size: 1.55rem;
+  margin: -8px 0 24px;
+  max-width: 48em;
+  line-height: 1.35;
+}
+
+.reg-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.reg-contact-card {
+  background: rgba(15, 21, 38, 0.75);
+  border: 3px solid var(--line);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 6px 6px 0 var(--shade);
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1),
+              border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.reg-contact-card:hover {
+  border-color: var(--acc);
+  transform: translateY(-4px);
+  box-shadow: 6px 10px 0 var(--shade), 0 0 16px rgba(91, 140, 255, 0.2);
+}
+
+.reg-contact-card.instagram-accent:hover {
+  border-color: #ff55a3;
+  box-shadow: 6px 10px 0 var(--shade), 0 0 16px rgba(255, 85, 163, 0.25);
+}
+
+.reg-contact-card.location-accent:hover {
+  border-color: #ffd166;
+  box-shadow: 6px 10px 0 var(--shade), 0 0 16px rgba(255, 209, 102, 0.2);
+}
+
+.reg-contact-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed var(--line);
+}
+
+.reg-contact-tag {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: var(--acc);
+}
+
+.reg-contact-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  padding: 4px 8px;
+  border: 2px solid currentColor;
+  line-height: 1;
+}
+
+.reg-contact-badge.email {
+  color: #00ffcc;
+  background: rgba(0, 255, 204, 0.08);
+  border-color: rgba(0, 255, 204, 0.4);
+}
+
+.reg-contact-badge.instagram {
+  color: #ff55a3;
+  background: rgba(255, 85, 163, 0.08);
+  border-color: rgba(255, 85, 163, 0.4);
+}
+
+.reg-contact-badge.location {
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.08);
+  border-color: rgba(255, 209, 102, 0.4);
+}
+
+.reg-contact-icon-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.reg-contact-symbol {
+  font-size: 1.4rem;
+  color: var(--acc);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--bg);
+  border: 2px solid var(--line);
+}
+
+.reg-contact-card-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.reg-contact-card-desc {
+  font-size: 1.35rem;
+  color: var(--dim);
+  line-height: 1.35;
+  margin: 0 0 16px;
+}
+
+.reg-contact-meta {
+  margin-top: auto;
+  padding: 12px;
+  background: var(--bg);
+  border: 2px solid var(--line);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.reg-contact-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: var(--acc);
+}
+
+.reg-contact-value {
+  font-size: 1.3rem;
+  color: var(--ink);
+  word-break: break-all;
+}
+
+.reg-contact-link {
+  color: #00ffcc;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  transition: color 0.15s ease;
+}
+
+.reg-contact-link:hover {
+  color: #fff;
+  text-decoration-style: solid;
+}
+
+.reg-contact-btn {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.65rem;
+  padding: 14px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.reg-contact-btn-social {
+  border-color: #ff55a3;
+  color: #ff55a3;
+  background: rgba(255, 85, 163, 0.08);
+}
+
+.reg-contact-btn-social:hover {
+  background: #ff55a3;
+  color: #080b16;
+}
+
+.reg-contact-footer-note {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.52rem;
+  color: var(--dim);
+  text-align: center;
+  padding: 12px 0;
+  border-top: 1px dashed var(--line);
+}
+
 /* Responsive adjustments */
 @media (max-width: 960px) {
   .reg-featured-card {
@@ -375,6 +574,9 @@
     padding: 24px;
   }
   .reg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reg-contact-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   .reg-meta-list {
@@ -395,6 +597,13 @@
     grid-template-columns: 1fr;
     gap: 18px;
   }
+  .reg-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .reg-contact-card {
+    padding: 18px;
+  }
   .reg-actions-row {
     flex-direction: column;
     align-items: stretch;
@@ -408,6 +617,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .reg-card {
+    transition: none !important;
+    transform: none !important;
+  }
+  .reg-contact-card {
     transition: none !important;
     transform: none !important;
   }

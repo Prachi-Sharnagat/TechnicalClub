@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { EVENTS_DATA, GOOGLE_FORM_URL } from '../data/events';
+import { CLUB_CONTACT } from '../data/contact';
 import EventRegistrationModal from '../components/events/EventRegistrationModal';
 import SecHead from '../components/graphics/SecHead';
 import Px from '../components/graphics/Px';
@@ -169,6 +170,119 @@ export default function RegisterPage() {
           )}
         </>
       )}
+
+      {/* Visually Distinct Contact Us Section */}
+      <motion.section
+        className="reg-contact-section"
+        aria-labelledby="reg-contact-title"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="reg-contact-head">
+          <SecHead title="CONTACT US" />
+          <p className="reg-contact-intro">
+            {CLUB_CONTACT.invitation}
+          </p>
+        </div>
+
+        <div className="reg-contact-grid">
+          {/* Email Card */}
+          <div className="reg-contact-card">
+            <div className="reg-contact-card-top">
+              <span className="reg-contact-tag">// OFFICIAL INBOX</span>
+              <span className="reg-contact-badge email">DIRECT EMAIL</span>
+            </div>
+            <div className="reg-contact-icon-row">
+              <span className="reg-contact-symbol">✉</span>
+              <h3 className="reg-contact-card-title">EMAIL US</h3>
+            </div>
+            <p className="reg-contact-card-desc">
+              Reach out for technical questions, project collaborations, workshops, or club activities.
+            </p>
+            <div className="reg-contact-meta">
+              <span className="reg-contact-label">EMAIL:</span>
+              <a
+                href={`mailto:${CLUB_CONTACT.email}`}
+                className="reg-contact-value reg-contact-link"
+                title={`Send email to ${CLUB_CONTACT.email}`}
+              >
+                {CLUB_CONTACT.email}
+              </a>
+            </div>
+            <a
+              href={`mailto:${CLUB_CONTACT.email}`}
+              className="btn go reg-contact-btn"
+              aria-label={`Send email to ${CLUB_CONTACT.email}`}
+            >
+              <span>SEND EMAIL</span>
+              <Px name="arrow" className="inl" />
+            </a>
+          </div>
+
+          {/* Instagram Card */}
+          <div className="reg-contact-card instagram-accent">
+            <div className="reg-contact-card-top">
+              <span className="reg-contact-tag">// SOCIAL FEED</span>
+              <span className="reg-contact-badge instagram">INSTAGRAM</span>
+            </div>
+            <div className="reg-contact-icon-row">
+              <span className="reg-contact-symbol">◈</span>
+              <h3 className="reg-contact-card-title">INSTAGRAM</h3>
+            </div>
+            <p className="reg-contact-card-desc">
+              Follow for live event footage, Robo Drive build clips, hackathon alerts, and club updates.
+            </p>
+            <div className="reg-contact-meta">
+              <span className="reg-contact-label">HANDLE:</span>
+              <a
+                href={CLUB_CONTACT.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="reg-contact-value reg-contact-link"
+                title="Open Technical Club RBU official Instagram in a new tab"
+              >
+                {CLUB_CONTACT.instagram}
+              </a>
+            </div>
+            <a
+              href={CLUB_CONTACT.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn reg-contact-btn reg-contact-btn-social"
+              aria-label="Open Technical Club RBU official Instagram in a new tab"
+            >
+              <span>OPEN INSTAGRAM</span>
+              <Px name="arrow" className="inl ext" />
+            </a>
+          </div>
+
+          {/* Campus Location Card */}
+          <div className="reg-contact-card location-accent">
+            <div className="reg-contact-card-top">
+              <span className="reg-contact-tag">// CLUB BASE</span>
+              <span className="reg-contact-badge location">CAMPUS</span>
+            </div>
+            <div className="reg-contact-icon-row">
+              <span className="reg-contact-symbol">⚑</span>
+              <h3 className="reg-contact-card-title">CAMPUS ARENA</h3>
+            </div>
+            <p className="reg-contact-card-desc">
+              Connect with club members on-ground during active build nights and robotics sessions.
+            </p>
+            <div className="reg-contact-meta">
+              <span className="reg-contact-label">LOCATION:</span>
+              <span className="reg-contact-value">
+                {CLUB_CONTACT.location}
+              </span>
+            </div>
+            <div className="reg-contact-footer-note">
+              <span>// VISITING HOURS: 10:00 AM - 6:00 PM</span>
+            </div>
+          </div>
+        </div>
+      </motion.section>
 
       {/* Embedded Google Form Modal */}
       <AnimatePresence>

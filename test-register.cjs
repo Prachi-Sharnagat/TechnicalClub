@@ -109,4 +109,31 @@ const eventCardContent = fs.readFileSync(path.join(__dirname, 'src', 'components
 assert(eventCardContent.includes('uniqueFacts'), 'EventCard.jsx implements uniqueFacts filter');
 console.log('[PASS] EventCard.jsx prevents duplicate event facts from rendering site-wide');
 
+// 10. Verify Contact Us configuration and Register page section
+const contactPath = path.join(__dirname, 'src', 'data', 'contact.js');
+assert(fs.existsSync(contactPath), 'src/data/contact.js must exist');
+const contactContent = fs.readFileSync(contactPath, 'utf8');
+assert(contactContent.includes('technicalclub@rknec.edu'), 'contact.js must contain verified email technicalclub@rknec.edu');
+assert(contactContent.includes('https://www.instagram.com/technicalclubrbu/'), 'contact.js must contain official Instagram link');
+assert(contactContent.includes('@technicalclubrbu'), 'contact.js must contain official Instagram handle');
+console.log('[PASS] src/data/contact.js defines verified email and Instagram configuration');
+
+// 11. Verify RegisterPage.jsx renders Contact Us section with email and Instagram links
+assert(regPageContent.includes('CLUB_CONTACT'), 'RegisterPage.jsx must import CLUB_CONTACT');
+assert(regPageContent.includes('reg-contact-section'), 'RegisterPage.jsx must render Contact Us section');
+assert(regPageContent.includes('mailto:'), 'Contact section must contain working mailto: link');
+assert(regPageContent.includes('target="_blank"'), 'Instagram link must open in a new tab');
+assert(regPageContent.includes('rel="noopener noreferrer"'), 'Instagram link must have rel="noopener noreferrer" for security');
+const eventCardIdx = regPageContent.indexOf('reg-featured-card');
+const contactSectionIdx = regPageContent.indexOf('reg-contact-section');
+assert(eventCardIdx !== -1 && contactSectionIdx !== -1 && eventCardIdx < contactSectionIdx, 'Contact Us section must be rendered AFTER the events section');
+console.log('[PASS] RegisterPage.jsx renders accessible Contact Us section with safe external links positioned after events');
+
+// 12. Verify CSS has responsive styles for Contact Us section
+const regCssContent = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'register.css'), 'utf8');
+assert(regCssContent.includes('.reg-contact-section'), 'register.css must include .reg-contact-section');
+assert(regCssContent.includes('.reg-contact-grid'), 'register.css must include .reg-contact-grid');
+assert(regCssContent.includes('.reg-contact-card'), 'register.css must include .reg-contact-card');
+console.log('[PASS] register.css contains retro-pixel styles and responsive layout for Contact Us');
+
 console.log('\nAll Register Page tests passed successfully!');
