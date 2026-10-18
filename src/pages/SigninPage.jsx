@@ -39,8 +39,11 @@ function validate(d) {
   return e;
 }
 
-export default function SigninPage() {
-  const [details, setDetails] = useState(EMPTY);
+export default function SigninPage({ preselectedEvent = "" }) {
+  const [details, setDetails] = useState(() => ({
+    ...EMPTY,
+    event: preselectedEvent || ""
+  }));
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("idle"); // idle | saving | done | error
   const [message, setMessage] = useState("");
@@ -62,6 +65,11 @@ export default function SigninPage() {
     setStatus("saving");
     setMessage("");
     try {
+      if (!db) {
+        setStatus("error");
+        setMessage("Database service is temporarily unavailable. Please try again later or reach out to the club.");
+        return;
+      }
       // One registration per email per event
       const id = `${details.email.trim().toLowerCase()}_${details.event}`.replace(
         /[\/\s]/g,
