@@ -1,9 +1,9 @@
 export default function Nav({ links, cta }) {
   return (
     <nav>
-      <a className="logo px" href="index.html">
-        <i />
-        TECHNICAL CLUB
+      <a className="logo px" href="/">
+        <img src="/technical-club-logo.png" alt="Technical Club RBU Logo" className="logo-img" />
+        <span>TECHNICAL CLUB</span>
       </a>
       <ul>
         {links.map(([label, href]) => (
