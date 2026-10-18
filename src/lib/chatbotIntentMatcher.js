@@ -116,19 +116,28 @@ const INTENT_RULES = [
     keywords: ['join', 'joining', 'member', 'members', 'recruitment', 'recruit', 'induction']
   },
 
-  // 8. Contact & Socials
+  // 8. Instagram & Social Media
+  {
+    intent: 'instagram',
+    patterns: [
+      /\binstagram\b/i,
+      /\binsta\b/i,
+      /\big\b/i,
+      /\b(social\s*media|social\s*handles?)\b/i
+    ],
+    keywords: ['instagram', 'insta', 'ig', 'handle', 'social']
+  },
+
+  // 9. Contact & Email
   {
     intent: 'contact',
     patterns: [
       /\bhow\s*(can|do)\s*i\s*contact\b/i,
       /\bcontact\s*(the\s*)?(club|us|team)\b/i,
       /\bemail\s*(address|id)?\b/i,
-      /\binstagram\b/i,
-      /\binsta\b/i,
-      /\bsocial\s*media\b/i,
       /\bwhere\s*(are\s*you|is\s*the\s*club|located)\b/i
     ],
-    keywords: ['contact', 'email', 'instagram', 'phone', 'location', 'reach', 'address']
+    keywords: ['contact', 'email', 'phone', 'location', 'reach', 'address']
   },
 
   // 9. Faculty Coordinators
