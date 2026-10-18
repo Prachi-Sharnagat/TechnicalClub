@@ -45,13 +45,7 @@ export const EVENTS_DATA = [
     embedUrl: GOOGLE_FORM_EMBED_URL,
     featured: true,
     sortOrder: 1,
-    badge: 'LIVE REGISTRATION',
-    facts: [
-      'Organizer: Technical Club RBU',
-      'Date: 22 October 2026',
-      'Time: 10:00 AM onwards',
-      'Venue: Digital Tower, Ground Floor Common Area'
-    ]
+    badge: 'LIVE REGISTRATION'
   },
 
   // --- UPCOMING EVENTS ---
@@ -149,8 +143,6 @@ export const EVENTS_DATA = [
     sortOrder: 1,
     badge: 'COMPLETED',
     facts: [
-      'Fri, 7th Feb',
-      '11am onwards, DT-702',
       'Prize pool Rs. 3000'
     ]
   },
@@ -199,8 +191,6 @@ export const EVENTS_DATA = [
     sortOrder: 3,
     badge: 'COMPLETED',
     facts: [
-      '23 April, 1PM to 4PM',
-      'Online coding contest',
       'With Coding Ninjas'
     ]
   }

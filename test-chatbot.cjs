@@ -106,5 +106,22 @@ assert(response.text.includes('ROBO DRIVE'), 'Response contains Robo Drive detai
 assert(Array.isArray(response.actions) && response.actions.length > 0, 'Response contains action buttons');
 assert(Boolean(response.timestamp), 'Response has timestamp');
 
+// Test Instagram Intent and URL
+const instaNode = matchUserIntent('instagram link for chatbot');
+assert(instaNode && instaNode.id === 'instagram-social', 'Query "instagram link for chatbot" maps to instagram-social node');
+
+const instaQueryNode = matchUserIntent('what is your instagram?');
+assert(instaQueryNode && instaQueryNode.id === 'instagram-social', 'Query "what is your instagram?" maps to instagram-social node');
+
+const instaResponse = generateBotResponse('instagram link');
+assert(instaResponse.text.includes('@technicalclubrbu'), 'Instagram response includes @technicalclubrbu handle');
+assert(instaResponse.text.includes('https://www.instagram.com/technicalclubrbu/'), 'Instagram response includes exact Instagram URL');
+assert(instaResponse.actions.some(a => a.url === 'https://www.instagram.com/technicalclubrbu/'), 'Instagram response has direct external action button');
+
+// Verify Contact node also includes updated Instagram handle and URL
+const contactNode = kb.KNOWLEDGE_BASE.contact;
+assert(contactNode.summary.includes('@technicalclubrbu'), 'Contact summary includes @technicalclubrbu');
+assert(contactNode.actions.some(a => a.url === 'https://www.instagram.com/technicalclubrbu/'), 'Contact action includes verified Instagram link');
+
 console.log(`\nResults: ${passed} passed, ${failed} failed.`);
 if (failed > 0) process.exit(1);

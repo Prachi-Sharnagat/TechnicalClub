@@ -187,20 +187,44 @@ You can view our three faculty coordinator profiles at the very top of the Membe
     followUps: ['Who are we?', 'What are our technical domains?', 'What projects do we work on?']
   },
 
+  instagram: {
+    id: 'instagram-social',
+    title: 'Official Instagram — Technical Club RBU',
+    summary: `📸 Follow Technical Club RBU on Instagram!
+
+• Handle: @technicalclubrbu
+• Link: https://www.instagram.com/technicalclubrbu/
+
+Stay connected for live event updates, Robo Drive highlights, hackathon announcements, workshop registrations, and student projects!`,
+    actions: [
+      {
+        label: 'OPEN INSTAGRAM',
+        url: 'https://www.instagram.com/technicalclubrbu/',
+        isInternal: false
+      },
+      {
+        label: 'EMAIL US',
+        url: 'mailto:technicalclub@rknec.edu',
+        isInternal: false
+      }
+    ],
+    followUps: ['What events do we organize?', 'What is Robo Drive?', 'How can I contact the club?']
+  },
+
   contact: {
     id: 'contact-info',
     title: 'Contact Technical Club RBU',
     summary: `You can reach out to Technical Club through the following verified channels:
 
+• Instagram: @technicalclubrbu (https://www.instagram.com/technicalclubrbu/)
 • Email: technicalclub@rknec.edu
 • Website: rcoem-technical.club
-• Instagram: @technicalclubrcoem
 • Location: Digital Tower, Ramdeobaba University, Nagpur
 
 Feel free to connect for event inquiries, project collaborations, or general questions!`,
     actions: [
-      { label: 'EMAIL US', url: 'mailto:technicalclub@rknec.edu', isInternal: false },
-      { label: 'INSTAGRAM', url: 'https://instagram.com/technicalclubrcoem', isInternal: false }
+      { label: 'FOLLOW ON INSTAGRAM', url: 'https://www.instagram.com/technicalclubrbu/', isInternal: false },
+      { label: 'EMAIL US', url: 'mailto:technicalclub@rknec.edu', isInternal: false }
     ],
     followUps: ['Who are we?', 'What is Robo Drive?', 'How can I join the club?']
   },
@@ -208,7 +232,7 @@ Feel free to connect for event inquiries, project collaborations, or general que
   greetings: {
     id: 'greeting',
     title: 'Hello!',
-    summary: `Hello! 👾 I'm TC-BOT, ready to assist. You can ask me about our technical domains, events like Robo Drive, projects, how to join the club, or how to contact us!`,
+    summary: `Hello! 👾 I'm TC-BOT, ready to assist. You can ask me about our technical domains, events like Robo Drive, projects, how to join the club, our Instagram, or how to contact us!`,
     actions: [
       { label: 'EXPLORE EVENTS', path: '/events', isInternal: true },
       { label: 'VIEW DOMAINS', path: '/domains', isInternal: true }
@@ -226,7 +250,7 @@ Feel free to connect for event inquiries, project collaborations, or general que
 • Ongoing events like Robo Drive
 • Upcoming hackathons and workshops
 • How to join or register
-• Contact and social handles
+• Contact and Instagram (@technicalclubrbu)
 
 Feel free to pick one of the suggestions below or ask in different words!`,
     actions: [
