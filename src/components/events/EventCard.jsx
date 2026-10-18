@@ -129,13 +129,24 @@ export default function EventCard({
               <span className="ev-meta-val">{event.venue}</span>
             </div>
           )}
-          {event.facts && event.facts.length > 0 && (
-            <ul className="ev-facts-list">
-              {event.facts.map((fact, idx) => (
-                <li key={idx} className="ev-fact-item">{fact}</li>
-              ))}
-            </ul>
-          )}
+          {(() => {
+            const uniqueFacts = (event.facts || []).filter((fact) => {
+              const lower = fact.toLowerCase();
+              if (/^(organizer|date|time|venue)\s*:/i.test(fact)) return false;
+              if (event.date && lower.includes(event.date.toLowerCase())) return false;
+              if (event.venue && lower.includes(event.venue.toLowerCase())) return false;
+              if (event.organizer && lower.includes(event.organizer.toLowerCase())) return false;
+              return true;
+            });
+            if (uniqueFacts.length === 0) return null;
+            return (
+              <ul className="ev-facts-list">
+                {uniqueFacts.map((fact, idx) => (
+                  <li key={idx} className="ev-fact-item">{fact}</li>
+                ))}
+              </ul>
+            );
+          })()}
         </div>
       </div>
 

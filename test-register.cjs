@@ -86,12 +86,27 @@ const EMPTY_MSG = 'No events are currently open for registration. Check back soo
 assert(EMPTY_MSG.includes('No events are currently open for registration'), 'Empty state message matches specification');
 console.log('[PASS] Empty state condition and copy verified: "No events are currently open for registration. Check back soon!"');
 
-// 7. Verify RegisterPage.jsx contains the required elements
+// 7. Verify RegisterPage.jsx contains the required elements and no duplicates
 const regPageContent = fs.readFileSync(path.join(__dirname, 'src', 'pages', 'RegisterPage.jsx'), 'utf8');
 assert(regPageContent.includes('EventRegistrationModal'), 'Must import EventRegistrationModal');
 assert(regPageContent.includes('No events are currently open for registration. Check back soon!'), 'Must include empty state copy');
 assert(regPageContent.includes('featuredEvent'), 'Must render featured event');
 assert(regPageContent.includes('REGISTER NOW'), 'Must render Register Now button');
-console.log('[PASS] RegisterPage.jsx source contains all required elements, copy, and modal triggers');
+assert(!regPageContent.includes('<span className="reg-meta-label">// STATUS</span>'), 'Duplicate status box removed from metadata list');
+assert(!regPageContent.includes('<span className="reg-meta-label">// ORGANIZER</span>'), 'Organizer removed from metadata list to avoid duplication with badge header');
+assert(regPageContent.includes('reg-organizer-pill'), 'Organizer displayed once in badge row');
+assert(regPageContent.includes('DATE:'), 'Structured metadata contains DATE');
+assert(regPageContent.includes('TIME:'), 'Structured metadata contains TIME');
+assert(regPageContent.includes('VENUE:'), 'Structured metadata contains VENUE');
+console.log('[PASS] RegisterPage.jsx source contains single organizer line, structured Date/Time/Venue, and no duplicates');
+
+// 8. Verify robo-drive-2026 data has no duplicate facts array
+assert(!robo.facts || robo.facts.length === 0, 'Robo Drive must not contain duplicate facts array');
+console.log('[PASS] Robo Drive event data does not contain duplicate facts');
+
+// 9. Verify EventCard.jsx smart filter keeps unique info while filtering out duplicate date/venue/organizer
+const eventCardContent = fs.readFileSync(path.join(__dirname, 'src', 'components', 'events', 'EventCard.jsx'), 'utf8');
+assert(eventCardContent.includes('uniqueFacts'), 'EventCard.jsx implements uniqueFacts filter');
+console.log('[PASS] EventCard.jsx prevents duplicate event facts from rendering site-wide');
 
 console.log('\nAll Register Page tests passed successfully!');

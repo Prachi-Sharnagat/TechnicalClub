@@ -123,36 +123,32 @@ export default function RegisterPage() {
                   <span className="reg-category-pill">
                     {featuredEvent.category || 'FEATURED EVENT'}
                   </span>
+                  {featuredEvent.organizer && (
+                    <span className="reg-organizer-pill">
+                      // {featuredEvent.organizer}
+                    </span>
+                  )}
                 </div>
 
                 <h1 className="reg-event-title">{featuredEvent.title}</h1>
                 <p className="reg-tagline">{featuredEvent.tagline}</p>
                 <p className="reg-description">{featuredEvent.description}</p>
 
-                {/* Metadata List */}
+                {/* Structured Event Details: Date, Time, Venue */}
                 <div className="reg-meta-list">
                   <div className="reg-meta-item">
-                    <span className="reg-meta-label">// DATE & TIME</span>
-                    <span className="reg-meta-val">
-                      {featuredEvent.date} • {featuredEvent.time}
-                    </span>
+                    <span className="reg-meta-label">DATE:</span>
+                    <span className="reg-meta-val">{featuredEvent.date}</span>
                   </div>
 
                   <div className="reg-meta-item">
-                    <span className="reg-meta-label">// VENUE</span>
+                    <span className="reg-meta-label">TIME:</span>
+                    <span className="reg-meta-val">{featuredEvent.time}</span>
+                  </div>
+
+                  <div className="reg-meta-item reg-meta-venue">
+                    <span className="reg-meta-label">VENUE:</span>
                     <span className="reg-meta-val">{featuredEvent.venue}</span>
-                  </div>
-
-                  <div className="reg-meta-item">
-                    <span className="reg-meta-label">// ORGANIZER</span>
-                    <span className="reg-meta-val">{featuredEvent.organizer}</span>
-                  </div>
-
-                  <div className="reg-meta-item">
-                    <span className="reg-meta-label">// STATUS</span>
-                    <span className="reg-meta-val" style={{ color: '#00ffcc' }}>
-                      ACCEPTING ENTRIES
-                    </span>
                   </div>
                 </div>
 
