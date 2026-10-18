@@ -296,14 +296,14 @@
 }
 
 /* Responsive styles */
-@media (max-width: 960px) {
+@media (max-width: 1023px) {
   .faculty-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 767px) {
   .faculty-section {
     padding-top: 24px;
     padding-bottom: 28px;
@@ -324,6 +324,22 @@
   }
 }
 
+@media (max-width: 374px) {
+  .faculty-card {
+    padding: 14px;
+  }
+  .faculty-slot-tag {
+    font-size: 0.52rem;
+  }
+  .faculty-status-pill {
+    font-size: 0.46rem;
+    padding: 3px 6px;
+  }
+  .faculty-email-link {
+    font-size: 1.05rem;
+  }
+}
+
 /* Accessibility & Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   .faculty-card {
@@ -338,3 +354,4 @@
     transform: none !important;
   }
 }
+

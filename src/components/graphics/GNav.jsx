@@ -13,7 +13,7 @@ export default function GNav({ links, cta = { label: 'JOIN', href: '#join' } }) 
     <header className="gnav">
       <div className="wrap">
         <div className="gnav-bar">
-          <a className="logo px" href="index.html"><i />TECHNICAL CLUB</a>
+          <a className="logo px" href="/"><img src="/technical-club-logo.png" alt="Technical Club RBU Logo" className="logo-img" />TECHNICAL CLUB</a>
           <ul className="glinks">{items()}</ul>
           <a className="btn gjoin" href={cta.href}>{cta.label}</a>
           <button className="burger" aria-label="Menu" aria-expanded={open} onClick={() => setOpen(!open)}><Px name="menu" /></button>
