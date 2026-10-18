@@ -74,10 +74,22 @@
   border-color: rgba(255, 209, 102, 0.4);
 }
 
-.faculty-status-pill.verified {
+.faculty-status-pill.verified,
+.faculty-status-pill.faculty {
   color: #00ffcc;
   background: rgba(0, 255, 204, 0.08);
   border-color: rgba(0, 255, 204, 0.4);
+}
+
+.faculty-status-pill.student {
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.08);
+  border-color: rgba(255, 209, 102, 0.4);
+}
+
+.faculty-card.student-coord:hover {
+  border-color: #ffd166;
+  box-shadow: 6px 10px 0 var(--shade), 0 0 18px rgba(255, 209, 102, 0.22);
 }
 
 .faculty-photo-frame {
@@ -147,15 +159,62 @@
 .faculty-role {
   font-size: 1.4rem;
   color: var(--acc);
-  margin: 0 0 4px;
+  margin: 0 0 8px;
   line-height: 1.2;
 }
 
 .faculty-dept {
   font-size: 1.25rem;
   color: var(--dim);
-  margin: 0 0 12px;
-  line-height: 1.2;
+  margin: 0 0 8px;
+  line-height: 1.25;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.faculty-meta-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.52rem;
+  color: var(--acc);
+}
+
+.faculty-dept-val {
+  color: var(--ink);
+}
+
+.faculty-year-row .faculty-meta-label {
+  color: #ffd166;
+}
+
+.faculty-year-val {
+  color: #ffd166;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.58rem;
+}
+
+.faculty-email-row {
+  font-size: 1.25rem;
+  margin: 2px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.faculty-email-link {
+  color: #00ffcc;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  font-size: 1.2rem;
+  word-break: break-all;
+  transition: color 0.15s ease;
+}
+
+.faculty-email-link:hover {
+  color: #fff;
+  text-decoration-style: solid;
 }
 
 .faculty-divider {

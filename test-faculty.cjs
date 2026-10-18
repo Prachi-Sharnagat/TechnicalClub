@@ -54,4 +54,31 @@ assert(cssContent.includes('prefers-reduced-motion'), 'faculty.css must include 
 assert(cssContent.includes('repeat(3, 1fr)'), 'faculty.css must support 3 cards in one row on desktop');
 console.log('[PASS] faculty.css includes desktop 3-column grid and prefers-reduced-motion rules');
 
+// 8. Verify exact coordinator profiles and values in faculty.js
+assert(facultyContent.includes('Ashlesh Jaiswal'), 'Must include Ashlesh Jaiswal');
+assert(facultyContent.includes('ECU'), 'Must include ECU for Ashlesh Jaiswal');
+assert(facultyContent.includes('jaiswalaa@rknec.edu'), 'Must include jaiswalaa@rknec.edu');
+
+assert(facultyContent.includes('Pankaj Joshi'), 'Must include Pankaj Joshi');
+assert(facultyContent.includes('ENU'), 'Must include ENU for Pankaj Joshi');
+assert(facultyContent.includes('joshipu@rknec.edu'), 'Must include joshipu@rknec.edu');
+
+assert(facultyContent.includes('Siddhant Deshmukh'), 'Must include Siddhant Deshmukh');
+assert(facultyContent.includes('Technical Club Coordinator (TCC)'), 'Must include Technical Club Coordinator (TCC)');
+assert(/3rd\s*Year/i.test(facultyContent), 'Must include 3rd Year academic year for Siddhant Deshmukh');
+
+// Ensure placeholders are removed
+assert(!facultyContent.includes('Faculty Coordinator 1'), 'Placeholder name Faculty Coordinator 1 must be removed');
+assert(!facultyContent.includes('Department details pending'), 'Placeholder Department details pending must be removed');
+console.log('[PASS] All 3 profiles match required names, labels, and emails exactly');
+
+// 9. Verify FacultyCard.jsx has mailto links, no pending labels, and displays student role
+const cardContent = fs.readFileSync(path.join(__dirname, 'src', 'components', 'members', 'FacultyCard.jsx'), 'utf8');
+assert(!cardContent.includes('PROFILE PENDING'), 'PROFILE PENDING must be removed from FacultyCard');
+assert(!cardContent.includes('DETAILS PENDING'), 'DETAILS PENDING must be removed from FacultyCard');
+assert(cardContent.includes('mailto:${coordinator.email}'), 'Must render clickable mailto: links');
+assert(cardContent.includes('faculty-email-link'), 'Must render readable email link');
+assert(cardContent.includes('academicYear'), 'Must render academic year for student coordinator');
+console.log('[PASS] FacultyCard renders readable mailto: links and no placeholder labels');
+
 console.log('\nAll Faculty Coordinators tests passed successfully!');
