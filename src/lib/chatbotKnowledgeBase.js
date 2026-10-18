@@ -174,6 +174,19 @@ Past events like Marvel Assemble: Jeopardy are completed and no longer accepting
     followUps: ['What is Robo Drive?', 'What events do we organize?', 'How can I contact the club?']
   },
 
+  faculty: {
+    id: 'faculty-coordinators',
+    title: 'Faculty Coordinators',
+    summary: `Technical Club RBU is guided by our institutional faculty coordinators and advisors who provide academic mentorship, governance, and technical leadership.
+
+You can view our three faculty coordinator profiles at the very top of the Members page, featured before the student member orbit!`,
+    actions: [
+      { label: 'VIEW FACULTY COORDINATORS', path: '/members', isInternal: true },
+      { label: 'WHO ARE WE?', path: '/', isInternal: true }
+    ],
+    followUps: ['Who are we?', 'What are our technical domains?', 'What projects do we work on?']
+  },
+
   contact: {
     id: 'contact-info',
     title: 'Contact Technical Club RBU',

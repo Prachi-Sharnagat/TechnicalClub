@@ -131,6 +131,19 @@ const INTENT_RULES = [
     keywords: ['contact', 'email', 'instagram', 'phone', 'location', 'reach', 'address']
   },
 
+  // 9. Faculty Coordinators
+  {
+    intent: 'faculty',
+    patterns: [
+      /\bfaculty(\s*coordinators?|\s*advisors?|\s*mentors?)?\b/i,
+      /\bprofessors?\b/i,
+      /\bteachers?\b/i,
+      /\bmentors?\b/i,
+      /\bcoordinator(s)?\b/i
+    ],
+    keywords: ['faculty', 'professor', 'coordinator', 'coordinators', 'advisor', 'advisors', 'mentor', 'mentors']
+  },
+
   // 9. Greetings
   {
     intent: 'greetings',

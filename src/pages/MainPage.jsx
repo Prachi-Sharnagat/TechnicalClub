@@ -6,13 +6,13 @@ import usePageFlip from '../lib/usePageFlip';
 import HomeSection from '../components/site/HomeSection';
 import DomainsSection from '../components/site/DomainsSection';
 import EventsSection from '../components/site/EventsSection';
-import OrbitShowcase from '../components/OrbitShowcase';
+import MembersSection from '../components/site/MembersSection';
 import NextHint from '../components/site/NextHint';
 
 const VIEWS = {
   home: HomeSection,
   domains: DomainsSection,
-  members: OrbitShowcase,
+  members: MembersSection,
   events: EventsSection
 };
 
