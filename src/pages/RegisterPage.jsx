@@ -20,7 +20,6 @@ export default function RegisterPage() {
 
   // Primary active event is Robo Drive if open, or the first open event
   const featuredEvent = openEvents.find((e) => e.featured || e.displayStatus === 'ongoing') || openEvents[0];
-  const otherOpenEvents = openEvents.filter((e) => e.id !== featuredEvent?.id);
 
   // Handle URL query parameter, e.g. /register?event=ROBO%20DRIVE
   useEffect(() => {
@@ -171,45 +170,6 @@ export default function RegisterPage() {
                 </div>
               </div>
             </motion.section>
-          )}
-
-          {/* Case 3: Additional Open Workshops or Hackathons */}
-          {otherOpenEvents.length > 0 && (
-            <section className="reg-more-section" aria-label="Additional open registrations">
-              <SecHead title="MORE OPEN REGISTRATIONS" />
-              <p className="sec-intro" style={{ marginTop: '-8px', marginBottom: '24px' }}>
-                Explore hands-on technical workshops and upcoming prototyping challenges.
-              </p>
-
-              <div className="reg-grid">
-                {otherOpenEvents.map((evt) => (
-                  <article key={evt.id} className="reg-card">
-                    <div className="reg-card-top">
-                      <span className="reg-status-pill open">OPEN</span>
-                      <span className="reg-category-pill">{evt.category || 'WORKSHOP'}</span>
-                    </div>
-
-                    <h2 className="reg-card-title">{evt.title}</h2>
-                    <p className="reg-card-tagline">{evt.tagline}</p>
-                    <p className="reg-card-desc">{evt.description || evt.text}</p>
-
-                    <div className="reg-card-meta">
-                      <div><strong>DATE:</strong> {evt.date}</div>
-                      <div><strong>TIME:</strong> {evt.time}</div>
-                      <div><strong>VENUE:</strong> {evt.venue}</div>
-                    </div>
-
-                    <button
-                      type="button"
-                      className="btn go reg-card-btn"
-                      onClick={(e) => handleRegisterClick(evt, e)}
-                    >
-                      REGISTER FOR {evt.title.toUpperCase()}
-                    </button>
-                  </article>
-                ))}
-              </div>
-            </section>
           )}
         </>
       )}
