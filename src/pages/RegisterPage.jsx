@@ -168,19 +168,6 @@ export default function RegisterPage() {
                     <span>REGISTER NOW [⚡]</span>
                     <Px name="arrow" className="inl" />
                   </button>
-
-                  {featuredEvent.registrationUrl && (
-                    <a
-                      href={featuredEvent.registrationUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn reg-btn-sec"
-                      aria-label="Open registration form in new tab"
-                    >
-                      <span>EXTERNAL FORM</span>
-                      <Px name="arrow" className="inl ext" />
-                    </a>
-                  )}
                 </div>
               </div>
             </motion.section>
