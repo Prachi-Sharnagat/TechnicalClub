@@ -3,6 +3,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { SECTION_PATHS } from '../lib/sections';
 import SiteNav from '../components/site/SiteNav';
 import Footer from '../components/Footer';
+import ChatbotWidget from '../components/chatbot/ChatbotWidget';
 
 export default function SiteLayout() {
   const { pathname } = useLocation();
@@ -15,6 +16,8 @@ export default function SiteLayout() {
         <Outlet />
       </Suspense>
       <Footer text="Technical Club. Build, learn, share." />
+      {/* Global TC-BOT Assistant mounted across all site routes */}
+      <ChatbotWidget />
     </>
   );
 }

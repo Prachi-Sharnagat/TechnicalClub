@@ -1,0 +1,532 @@
+/* ========================================================
+   TC-BOT: Retro Pixel-Art Chatbot Interface Styles
+   Matches Technical Club RBU design tokens & visual identity
+   ======================================================== */
+
+.tc-chatbot-root {
+  position: relative;
+  z-index: 900;
+}
+
+/* Floating Launcher Button */
+.tc-launcher-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 950;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--panel);
+  border: 3px solid var(--acc);
+  color: var(--ink);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  padding: 12px 18px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 var(--shade);
+  transition: transform 0.15s steps(2), box-shadow 0.15s steps(2);
+  outline: none;
+}
+.tc-launcher-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--shade);
+  border-color: #79a4ff;
+}
+.tc-launcher-btn:active,
+.tc-launcher-btn.active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--shade);
+  background: rgba(91, 140, 255, 0.18);
+}
+.tc-launcher-btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 3px;
+}
+
+.tc-launcher-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--acc);
+}
+.tc-launcher-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.tc-launcher-led {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+  animation: tcLedPulse 1.8s steps(2) infinite;
+}
+@keyframes tcLedPulse {
+  50% { opacity: 0.3; }
+}
+
+.tc-launcher-label {
+  letter-spacing: -0.02em;
+}
+
+/* ========================================================
+   CHAT PANEL WINDOW
+   ======================================================== */
+.tc-panel-win {
+  position: fixed;
+  bottom: 84px;
+  right: 24px;
+  width: min(94vw, 420px);
+  height: 600px;
+  max-height: min(78vh, 640px);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 4px solid var(--acc);
+  box-shadow: 8px 8px 0 var(--shade);
+  overflow: hidden;
+}
+
+/* Panel Titlebar */
+.tc-panel-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--acc);
+  color: var(--bg);
+  padding: 8px 12px;
+  user-select: none;
+}
+.tc-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.tc-bar-led {
+  width: 8px;
+  height: 8px;
+  background: #00ff88;
+  box-shadow: 0 0 6px #00ff88;
+  display: inline-block;
+}
+.tc-bar-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.62rem;
+  margin: 0;
+  color: var(--bg);
+  letter-spacing: -0.01em;
+}
+.tc-bar-controls {
+  display: flex;
+  gap: 6px;
+}
+.tc-bar-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: var(--bg);
+  cursor: pointer;
+  padding: 2px 4px;
+  font-weight: bold;
+}
+.tc-bar-btn:hover {
+  background: var(--bg);
+  color: var(--acc);
+}
+
+/* Subheader */
+.tc-panel-subheader {
+  background: rgba(91, 140, 255, 0.08);
+  border-bottom: 2px solid var(--line);
+  padding: 8px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.15rem;
+  color: var(--dim);
+}
+.tc-sub-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tc-status-tag {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  color: #00ff88;
+  letter-spacing: -0.02em;
+}
+
+/* ========================================================
+   MESSAGES CONTAINER & BUBBLES
+   ======================================================== */
+.tc-messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: #090c17;
+  scroll-behavior: smooth;
+  outline: none;
+}
+.tc-messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+.tc-messages-container::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border: 1px solid var(--acc);
+}
+
+.tc-msg-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tc-msg-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.tc-msg-bot {
+  align-self: flex-start;
+  max-width: 95%;
+}
+.tc-msg-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+  max-width: 88%;
+}
+
+/* Avatars */
+.tc-msg-avatar {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+}
+.tc-bot-avatar-icon {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--acc);
+  background: var(--panel);
+  color: var(--acc);
+  padding: 4px;
+  box-shadow: 2px 2px 0 var(--shade);
+}
+.tc-bot-avatar-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.tc-user-avatar-icon {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--line);
+  background: var(--shade);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+}
+.user-icon-txt {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+}
+
+/* Message Bubble */
+.tc-msg-bubble {
+  flex: 1;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  padding: 10px 14px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.4);
+}
+.tc-msg-user .tc-msg-bubble {
+  background: rgba(91, 140, 255, 0.16);
+  border-color: var(--acc);
+  box-shadow: 3px 3px 0 var(--shade);
+}
+
+.tc-msg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-bottom: 4px;
+}
+.tc-msg-sender {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: var(--acc);
+}
+.tc-msg-user .tc-msg-sender {
+  color: #fff;
+}
+.tc-msg-time {
+  font-size: 1.1rem;
+  color: var(--dim);
+}
+
+.tc-msg-body {
+  font-size: 1.35rem;
+  line-height: 1.25;
+  color: var(--ink);
+}
+.tc-msg-line {
+  margin: 0 0 6px;
+}
+.tc-msg-line:last-child {
+  margin-bottom: 0;
+}
+.tc-bullet-line {
+  color: var(--dim);
+  padding-left: 8px;
+}
+.tc-num-line {
+  color: var(--ink);
+  padding-left: 4px;
+}
+
+/* Action Navigation Buttons */
+.tc-msg-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 2px dashed var(--line);
+}
+.tc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.52rem;
+  color: var(--bg);
+  background: var(--acc);
+  border: 2px solid var(--acc);
+  padding: 8px 10px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--shade);
+  transition: transform 0.12s steps(2);
+}
+.tc-action-btn:hover {
+  transform: translateY(-2px);
+  background: #7ca5ff;
+}
+.tc-action-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+.tc-action-external {
+  background: transparent;
+  color: var(--acc);
+}
+.tc-action-external:hover {
+  background: rgba(91, 140, 255, 0.15);
+}
+
+/* Follow-up Chips */
+.tc-followups {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dotted var(--line);
+}
+.tc-followup-title {
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  color: var(--dim);
+  margin-bottom: 6px;
+}
+.tc-followup-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tc-followup-chip {
+  background: rgba(91, 140, 255, 0.1);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: 'VT323', monospace;
+  font-size: 1.25rem;
+  padding: 3px 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.12s steps(2);
+}
+.tc-followup-chip:hover {
+  border-color: var(--acc);
+  color: var(--acc);
+}
+
+/* Suggested Questions Box (under welcome message) */
+.tc-suggest-box {
+  background: rgba(15, 21, 38, 0.95);
+  border: 2px dashed var(--line);
+  padding: 10px 12px;
+  margin-left: 42px;
+}
+.tc-suggest-heading {
+  display: block;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.48rem;
+  color: var(--acc);
+  margin-bottom: 8px;
+}
+.tc-suggest-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.tc-suggest-chip {
+  background: var(--panel);
+  border: 2px solid var(--line);
+  color: var(--dim);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.48rem;
+  line-height: 1.4;
+  padding: 6px 8px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s steps(2);
+}
+.tc-suggest-chip:hover {
+  border-color: var(--acc);
+  color: var(--ink);
+  background: rgba(91, 140, 255, 0.12);
+  transform: translateX(4px);
+}
+.chip-prefix {
+  color: var(--acc);
+  margin-right: 4px;
+}
+
+/* Typing / Computing Indicator */
+.tc-computing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+}
+.tc-typing-spinner {
+  width: 14px;
+  height: 14px;
+  border: 3px solid var(--line);
+  border-top-color: var(--acc);
+  animation: tcSpin 0.8s steps(4) infinite;
+}
+@keyframes tcSpin {
+  to { transform: rotate(360deg); }
+}
+.tc-typing-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.52rem;
+  color: var(--acc);
+}
+
+/* ========================================================
+   CHAT INPUT FOOTER
+   ======================================================== */
+.tc-panel-footer {
+  background: var(--panel);
+  border-top: 3px solid var(--line);
+  padding: 10px;
+}
+.tc-input-form {
+  margin: 0;
+}
+.tc-input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #090c17;
+  border: 2px solid var(--line);
+  padding: 4px 8px;
+}
+.tc-input-box:focus-within {
+  border-color: var(--acc);
+  box-shadow: 0 0 6px rgba(91, 140, 255, 0.3);
+}
+.tc-input-prompt {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  color: var(--acc);
+}
+.tc-text-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--ink);
+  font-family: 'VT323', monospace;
+  font-size: 1.45rem;
+  line-height: 1;
+  padding: 4px 0;
+  outline: none;
+}
+.tc-text-input::placeholder {
+  color: #4b587d;
+  font-size: 1.3rem;
+}
+.tc-send-btn {
+  font-size: 0.52rem;
+  padding: 8px 10px;
+  box-shadow: 2px 2px 0 var(--shade);
+  border-width: 2px;
+  white-space: nowrap;
+}
+.tc-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ========================================================
+   MOBILE & ACCESSIBILITY MEDIA QUERIES
+   ======================================================== */
+@media (max-width: 600px) {
+  .tc-panel-win {
+    right: 12px;
+    left: 12px;
+    bottom: 80px;
+    width: auto;
+    height: 75vh;
+    max-height: calc(100vh - 100px);
+  }
+  .tc-launcher-btn {
+    bottom: 16px;
+    right: 16px;
+    padding: 10px 14px;
+    font-size: 0.58rem;
+  }
+  .tc-msg-body {
+    font-size: 1.25rem;
+  }
+  .tc-suggest-chip {
+    font-size: 0.45rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tc-launcher-btn,
+  .tc-panel-win,
+  .tc-typing-spinner,
+  .tc-launcher-led {
+    animation: none !important;
+    transition: none !important;
+  }
+}

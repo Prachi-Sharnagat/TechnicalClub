@@ -6,11 +6,13 @@ import './styles/home.css';
 import './styles/graphics.css';
 import './styles/webdev.css';
 import './styles/members.css';
+import './styles/faculty.css';
 import './styles/electronics.css';
 import './styles/video.css';
 import './styles/events.css';
 import './styles/register.css';
 import './styles/site.css';
+import './styles/chatbot.css';
 import App from './App';
 
 createRoot(document.getElementById('root')).render(
