@@ -52,17 +52,19 @@ We bring together passionate coders, makers, designers, and innovators. Our comm
   domains: {
     id: 'technical-domains',
     title: 'Our Technical Domains',
-    summary: `Technical Club is organized into four specialized core domains:
+    summary: `Technical Club is organized into five specialized core domains:
 
 1. 🌐 Web Development — Building modern responsive web applications, frontend architectures with React, APIs, and full-stack solutions.
 2. 🎨 Graphics & Design — Creative visual storytelling, UI/UX prototyping, event branding, posters, and motion design.
 3. ⚡ Electronics & Robotics — Hardware prototyping, Arduino, microcontrollers, embedded systems, and competitive robotics.
-4. 🎬 Video Editing — Cinematic visual editing, DaVinci Resolve workflows, motion graphics, and creative event media.`,
+4. 🎬 Video Editing — Cinematic visual editing, DaVinci Resolve workflows, motion graphics, and creative event media.
+5. 📢 Publicity — Social media, event promotion, outreach, branding and spreading awareness about club activities.`,
     actions: [
       { label: 'WEB DEV DOMAIN', path: '/domains/web-dev', isInternal: true },
       { label: 'GRAPHICS DOMAIN', path: '/domains/graphics', isInternal: true },
       { label: 'ELECTRONICS DOMAIN', path: '/domains/electronics', isInternal: true },
-      { label: 'VIDEO EDITING', path: '/domains/video-editing', isInternal: true }
+      { label: 'VIDEO EDITING', path: '/domains/video-editing', isInternal: true },
+      { label: 'PUBLICITY DOMAIN', path: '/domains/publicity', isInternal: true }
     ],
     followUps: ['What is Robo Drive?', 'What projects do we work on?', 'How can I join the club?']
   },
@@ -246,7 +248,7 @@ Feel free to connect for event inquiries, project collaborations, or general que
     summary: `I didn't quite catch that question! 🤖 As TC-BOT, I can help you with:
 
 • Who we are and our club mission
-• Our technical domains (Web Dev, Graphics, Electronics, Video)
+• Our technical domains (Web Dev, Graphics, Electronics, Video, Publicity)
 • Ongoing events like Robo Drive
 • Upcoming hackathons and workshops
 • How to join or register

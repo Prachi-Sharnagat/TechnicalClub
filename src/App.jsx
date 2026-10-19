@@ -8,6 +8,7 @@ const WebDevPage = lazy(() => import('./pages/WebDevPage'));
 const GraphicsPage = lazy(() => import('./pages/GraphicsPage'));
 const ElectronicsPage = lazy(() => import('./pages/ElectronicsPage'));
 const VideoPage = lazy(() => import('./pages/VideoPage'));
+const PublicityPage = lazy(() => import('./pages/PublicityPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/domains/graphics" element={<GraphicsPage />} />
         <Route path="/domains/electronics" element={<ElectronicsPage />} />
         <Route path="/domains/video-editing" element={<VideoPage />} />
+        <Route path="/domains/publicity" element={<PublicityPage />} />
         <Route path="/register" element={<RegisterPage />} />
         {/* /, /domains, /members, /events: one page, one scroll */}
         <Route path="*" element={<MainPage />} />

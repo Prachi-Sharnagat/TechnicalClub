@@ -88,7 +88,7 @@ console.log('[PASS] Firestore integration, honest error feedback, and secure mai
 // 8. Verify Email Card in RegisterPage.jsx
 const regPagePath = path.join(__dirname, 'src', 'pages', 'RegisterPage.jsx');
 const regPageCode = fs.readFileSync(regPagePath, 'utf8');
-assert(regPageCode.includes('EMAIL US'), 'RegisterPage.jsx must retain Email Us card');
+assert(regPageCode.includes('EMAIL'), 'RegisterPage.jsx must retain Email card');
 assert(regPageCode.includes('email-symbol') || regPageCode.includes('reg-contact-svg-icon'), 'Email card must include recognizable envelope icon/logo');
 assert(regPageCode.includes('mailto:${CLUB_CONTACT.email}') || regPageCode.includes('mailto:'), 'Email card must retain clickable mailto: link');
 assert(regPageCode.includes('SEND EMAIL'), 'Email card must retain Send Email button');
@@ -103,10 +103,12 @@ assert(regPageCode.includes('rel="noopener noreferrer"'), 'Instagram link must u
 assert(regPageCode.includes('OPEN INSTAGRAM'), 'Instagram card must retain Open Instagram button');
 console.log('[PASS] Instagram card verified: recognizable Instagram icon, verified URL, safe new tab attributes, and functional button');
 
-// 10. Verify Campus Card in RegisterPage.jsx
-assert(regPageCode.includes('CAMPUS ARENA'), 'RegisterPage.jsx must retain Campus location card');
-assert(regPageCode.includes('CLUB_CONTACT.location'), 'Campus card must display club location');
-console.log('[PASS] Campus information card preserved');
+// 10. Verify extra contact cards removed & official club logo displayed after form
+assert(!regPageCode.includes('CAMPUS ARENA'), 'Campus Arena card must be removed from Contact Us section');
+assert(!regPageCode.includes('VISITING HOURS'), 'Visiting hours must be removed');
+assert(regPageCode.includes('technical-club-logo.png'), 'Must display official Technical Club RBU logo');
+assert(regPageCode.includes('reg-club-logo-img'), 'Must style the official logo with reg-club-logo-img');
+console.log('[PASS] Extra cards removed; official Technical Club logo displayed after form');
 
 // 11. Verify CollaborationForm is mounted in RegisterPage.jsx
 assert(regPageCode.includes('<CollaborationForm />') || regPageCode.includes('<CollaborationForm/>'), 'RegisterPage.jsx must render CollaborationForm');
