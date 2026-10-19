@@ -183,18 +183,11 @@ export default function RegisterPage() {
       >
         <div className="reg-contact-head">
           <SecHead title="CONTACT US" />
-          <p className="reg-contact-intro">
-            {CLUB_CONTACT.invitation}
-          </p>
         </div>
 
         <div className="reg-contact-grid">
-          {/* Email Card */}
+          {/* Email Option */}
           <div className="reg-contact-card">
-            <div className="reg-contact-card-top">
-              <span className="reg-contact-tag">// OFFICIAL INBOX</span>
-              <span className="reg-contact-badge email">DIRECT EMAIL</span>
-            </div>
             <div className="reg-contact-icon-row">
               <span className="reg-contact-symbol email-symbol" aria-hidden="true">
                 <svg
@@ -212,22 +205,15 @@ export default function RegisterPage() {
                 </svg>
               </span>
               <div className="reg-contact-heading-wrap">
-                <h3 className="reg-contact-card-title">EMAIL US</h3>
-                <span className="reg-contact-card-subtitle">Questions and project enquiries</span>
+                <h3 className="reg-contact-card-title">EMAIL</h3>
+                <a
+                  href={`mailto:${CLUB_CONTACT.email}`}
+                  className="reg-contact-value reg-contact-link"
+                  title={`Send email to ${CLUB_CONTACT.email}`}
+                >
+                  {CLUB_CONTACT.email}
+                </a>
               </div>
-            </div>
-            <p className="reg-contact-card-desc">
-              Reach out for technical questions, project collaborations, workshops, or club activities.
-            </p>
-            <div className="reg-contact-meta">
-              <span className="reg-contact-label">EMAIL:</span>
-              <a
-                href={`mailto:${CLUB_CONTACT.email}`}
-                className="reg-contact-value reg-contact-link"
-                title={`Send email to ${CLUB_CONTACT.email}`}
-              >
-                {CLUB_CONTACT.email}
-              </a>
             </div>
             <a
               href={`mailto:${CLUB_CONTACT.email}`}
@@ -239,12 +225,8 @@ export default function RegisterPage() {
             </a>
           </div>
 
-          {/* Instagram Card */}
+          {/* Instagram Option */}
           <div className="reg-contact-card instagram-accent">
-            <div className="reg-contact-card-top">
-              <span className="reg-contact-tag">// SOCIAL FEED</span>
-              <span className="reg-contact-badge instagram">INSTAGRAM</span>
-            </div>
             <div className="reg-contact-icon-row">
               <span className="reg-contact-symbol instagram-symbol" aria-hidden="true">
                 <svg
@@ -264,23 +246,16 @@ export default function RegisterPage() {
               </span>
               <div className="reg-contact-heading-wrap">
                 <h3 className="reg-contact-card-title">INSTAGRAM</h3>
-                <span className="reg-contact-card-subtitle">Events and club updates</span>
+                <a
+                  href={CLUB_CONTACT.instagramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="reg-contact-value reg-contact-link"
+                  title="Open Technical Club RBU official Instagram in a new tab"
+                >
+                  {CLUB_CONTACT.instagram}
+                </a>
               </div>
-            </div>
-            <p className="reg-contact-card-desc">
-              Follow for live event footage, Robo Drive build clips, hackathon alerts, and club updates.
-            </p>
-            <div className="reg-contact-meta">
-              <span className="reg-contact-label">HANDLE:</span>
-              <a
-                href={CLUB_CONTACT.instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="reg-contact-value reg-contact-link"
-                title="Open Technical Club RBU official Instagram in a new tab"
-              >
-                {CLUB_CONTACT.instagram}
-              </a>
             </div>
             <a
               href={CLUB_CONTACT.instagramUrl}
@@ -293,51 +268,22 @@ export default function RegisterPage() {
               <Px name="arrow" className="inl ext" />
             </a>
           </div>
-
-          {/* Campus Location Card */}
-          <div className="reg-contact-card location-accent">
-            <div className="reg-contact-card-top">
-              <span className="reg-contact-tag">// CLUB BASE</span>
-              <span className="reg-contact-badge location">CAMPUS</span>
-            </div>
-            <div className="reg-contact-icon-row">
-              <span className="reg-contact-symbol location-symbol" aria-hidden="true">
-                <svg
-                  className="reg-contact-svg-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-              </span>
-              <div className="reg-contact-heading-wrap">
-                <h3 className="reg-contact-card-title">CAMPUS ARENA</h3>
-                <span className="reg-contact-card-subtitle">In-person workshop hub</span>
-              </div>
-            </div>
-            <p className="reg-contact-card-desc">
-              Connect with club members on-ground during active build nights and robotics sessions.
-            </p>
-            <div className="reg-contact-meta">
-              <span className="reg-contact-label">LOCATION:</span>
-              <span className="reg-contact-value">
-                {CLUB_CONTACT.location}
-              </span>
-            </div>
-            <div className="reg-contact-footer-note">
-              <span>// VISITING HOURS: 10:00 AM - 6:00 PM</span>
-            </div>
-          </div>
         </div>
 
         {/* Project & Collaboration Enquiry Form */}
         <CollaborationForm />
+
+        {/* Official Club Logo */}
+        <div className="reg-contact-brand-logo">
+          <img
+            src="/technical-club-logo.png"
+            alt="Technical Club RBU Official Logo"
+            className="reg-club-logo-img"
+            width="140"
+            height="140"
+            loading="lazy"
+          />
+        </div>
       </motion.section>
 
       {/* Embedded Google Form Modal */}

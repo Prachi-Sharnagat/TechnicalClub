@@ -8,6 +8,17 @@ const BITS = {
   chip: ['XXXXXXXXX', 'X.......X', 'X.X.X.X.X', 'X.XXXXX.X', 'X.XXXXX.X', 'X.XXXXX.X', 'X.X.X.X.X', 'X.......X', 'XXXXXXXXX'],
   signal: ['XXXXXXXXX', 'X.......X', 'X..XXX..X', 'X.X...X.X', 'X...X...X', 'X.......X', 'X...X...X', 'X.......X', 'XXXXXXXXX'],
   bot: ['XXXXXXXXX', 'X.......X', 'X.XX.XX.X', 'X.XX.XX.X', 'X.......X', 'X.XXXXX.X', 'X.......X', 'X.......X', 'XXXXXXXXX'],
+  megaphone: [
+    'XXXXXXXXX',
+    'X.......X',
+    'X..XX...X',
+    'X.XXXX..X',
+    'XXXXXX..X',
+    'X.XXXX..X',
+    'X..X.X..X',
+    'X....X..X',
+    'XXXXXXXXX'
+  ],
   mail: [
     'XXXXXXXXXXX',
     'XX.......XX',

@@ -26,19 +26,5 @@ export const FACULTY_COORDINATORS = [
     photo: '',
     profileUrl: '',
     isVerified: true
-  },
-  {
-    id: 'siddhant-deshmukh',
-    slot: '03',
-    type: 'student',
-    name: 'Siddhant Deshmukh',
-    designation: 'Technical Club Coordinator (TCC)',
-    role: 'Technical Club Coordinator (TCC)',
-    academicYear: '3rd Year',
-    department: '',
-    email: '',
-    photo: '',
-    profileUrl: '',
-    isVerified: true
   }
 ];

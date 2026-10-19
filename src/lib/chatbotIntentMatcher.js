@@ -56,9 +56,10 @@ const INTENT_RULES = [
       /\bgraphics\s*(\&|and)?\s*design\b/i,
       /\belectronics\s*(\&|and)?\s*robotics\b/i,
       /\bvideo\s*editing\b/i,
+      /\bpublicity(\s*(\&|and)?\s*outreach)?\b/i,
       /\btracks\b/i
     ],
-    keywords: ['domain', 'domains', 'web', 'graphics', 'electronics', 'hardware', 'davinci', 'arduino']
+    keywords: ['domain', 'domains', 'web', 'graphics', 'electronics', 'hardware', 'davinci', 'arduino', 'publicity', 'outreach']
   },
 
   // 4. Registrations

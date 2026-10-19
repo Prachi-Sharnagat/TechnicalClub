@@ -6,7 +6,6 @@ import Strip from '../components/Strip';
 import Section from '../components/Section';
 import Rows from '../components/Rows';
 import PixelIcon from '../components/PixelIcon';
-import Banner from '../components/Banner';
 import Footer from '../components/Footer';
 
 const LINKS = [['About', '#about'], ['What we do', '#do'], ['Web Dev', 'webdev.html'], ['Graphics', 'graphics.html'], ['Electronics', 'electronics.html'], ['Events', 'events.html'], ['Members', 'members.html']];
@@ -16,7 +15,7 @@ export default function HomePage() {
   return (
     <>
       <div className="wrap">
-        <Nav links={LINKS} cta={{ label: 'JOIN', href: '#join' }} />
+        <Nav links={LINKS} cta={{ label: 'JOIN', href: 'register.html' }} />
         <HomeHero />
         <HomeAbout />
       </div>
@@ -25,7 +24,6 @@ export default function HomePage() {
         <Section id="do" title="What we do">
           <Rows items={rows} />
         </Section>
-        <Banner title="Ready for launch?" text="Meet us at the lab. First project is on us." cta={{ label: 'JOIN THE CLUB', href: 'register.html' }} />
       </div>
       <Footer text="Technical Club. Build, learn, share." />
     </>
