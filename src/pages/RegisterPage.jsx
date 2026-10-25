@@ -69,61 +69,74 @@ export default function RegisterPage() {
     <div className="reg-page-container wrap" role="main">
       {/* Page Header */}
       <div className="reg-header-block">
-        <SecHead title="EVENT REGISTRATION" />
+        <SecHead title="TECHNICAL CLUB RECRUITMENT" />
         <p className="reg-subtitle">
-          Official registration gateway for Technical Club RBU competitions, workshops, and build sessions.
+          Official recruitment gateway for Technical Club RBU. Choose your domain, explore its recruitment task, and apply to join.
         </p>
       </div>
 
-      {/* Clean Official Google Form Event-Registration Card */}
+      {/* Official Technical Club Recruitment Card */}
       <motion.section
         className="reg-featured-card reg-official-card"
-        aria-label="Official Technical Club RBU Event Registration"
+        aria-label="Technical Club RBU Recruitment"
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        {/* Retro Pixel Art Box */}
+        {/* Desktop Left: Official Logo & Decorative Recruitment Visual Panel */}
         <div className="reg-poster-box reg-official-poster-box">
+          <div className="reg-decorative-art" aria-hidden="true">
+            <img
+              src="/technical-club-recruitment.jpg"
+              alt=""
+              className="reg-decorative-img"
+              loading="lazy"
+            />
+            <div className="reg-decorative-overlay" />
+            <div className="reg-decorative-scan" />
+          </div>
           <div className="reg-official-art">
             <div className="reg-official-glow" aria-hidden="true" />
             <img
               src="/technical-club-logo.png"
               alt="Technical Club RBU Official Logo"
               className="reg-official-logo"
-              width="140"
-              height="140"
+              width="110"
+              height="110"
               loading="lazy"
             />
-            <div className="reg-official-badge-pixel">
-              <Px name="chip" className="inl" />
-              <span>OFFICIAL FORM</span>
-            </div>
           </div>
-          <span className="reg-poster-badge">GOOGLE FORM</span>
         </div>
 
         {/* Card Details */}
         <div className="reg-details-box">
+          {/* Mobile-only Top Logo for strict vertical stacking order */}
+          <div className="reg-mobile-logo-wrap" aria-hidden="true">
+            <img
+              src="/technical-club-logo.png"
+              alt="Technical Club RBU Official Logo"
+              className="reg-mobile-logo"
+              width="110"
+              height="110"
+              loading="lazy"
+            />
+          </div>
+
           <div className="reg-badge-row">
             <span className="reg-status-pill open">
-              🟢 REGISTRATION OPEN
-            </span>
-            <span className="reg-category-pill reg-google-form-pill">
-              OFFICIAL GOOGLE FORM
+              🟢 RECRUITMENT OPEN
             </span>
             <span className="reg-organizer-pill">
               // Technical Club RBU
             </span>
           </div>
 
-          <h1 className="reg-event-title">EVENT REGISTRATION</h1>
-          <p className="reg-tagline">Technical Club RBU Official Portal</p>
+          <h1 className="reg-event-title">TECHNICAL CLUB RECRUITMENT</h1>
           <p className="reg-description">
-            Register for Technical Club RBU events using our official registration form.
+            Choose your domain, explore its recruitment task, and apply to join Technical Club RBU.
           </p>
 
-          {/* Structured Details Strip */}
+          {/* Structured Details Strip (compact presentation) */}
           <div className="reg-meta-list reg-official-meta-list">
             <div className="reg-meta-item">
               <span className="reg-meta-label">PORTAL:</span>
@@ -148,26 +161,27 @@ export default function RegisterPage() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn go reg-btn-main reg-btn-official"
-              aria-label="Register now for Technical Club RBU events via official Google Form (opens in a new tab)"
+              aria-label="Apply now for Technical Club RBU via official Google Form (opens in a new tab)"
             >
-              <span>REGISTER NOW →</span>
+              <span>APPLY NOW ↗</span>
             </a>
             <a
-              href={activeTask ? activeTask.pdfUrl : (MASTER_AUDITION_PDF || '#domain-tasks')}
-              target={activeTask || MASTER_AUDITION_PDF ? '_blank' : undefined}
-              rel={activeTask || MASTER_AUDITION_PDF ? 'noopener noreferrer' : undefined}
-              className="btn reg-btn-main reg-btn-task-hero"
-              aria-label={
-                activeTask
-                  ? `View ${activeTask.name} task PDF (opens in a new tab)`
-                  : 'View Technical Club audition task PDF (opens in a new tab)'
-              }
+              href="#domain-tasks"
+              onClick={(e) => {
+                e.preventDefault();
+                const el = document.getElementById('domain-tasks');
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="btn reg-btn-main reg-btn-sec reg-btn-task-hero"
+              aria-label="View domain tasks (scrolls to recruitment tasks section below)"
             >
-              <span>VIEW TASK PDF ↗</span>
+              <span>VIEW DOMAIN TASKS ↓</span>
             </a>
             {activeTask && (
               <div className="reg-selected-domain-pill">
-                <span>TASK: {activeTask.name}</span>
+                <span>SELECTED: {activeTask.name}</span>
                 <button
                   type="button"
                   onClick={() => setSelectedDomain(null)}

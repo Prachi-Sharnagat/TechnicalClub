@@ -16,10 +16,11 @@
 
 /* section heads */
 .gsec{margin-top:clamp(44px, 8vw, 84px)}
-.shead{display:flex;align-items:center;gap:14px;margin-bottom:26px}
-.shead i{width:18px;height:18px;background:var(--acc);box-shadow:inset -4px -4px 0 var(--shade);flex:none}
-.shead h2{font-family:'Press Start 2P',monospace;font-weight:400;font-size:clamp(.75rem,2vw,1.05rem);margin:0;color:var(--acc);white-space:nowrap}
-.shead .line{flex:1;height:3px;background:var(--line)}
+.shead{display:flex;align-items:center;gap:12px;margin-bottom:24px;width:100%;max-width:100%}
+.shead i{width:16px;height:16px;background:var(--acc);box-shadow:inset -4px -4px 0 var(--shade);flex-shrink:0}
+.shead h2{font-family:'Press Start 2P',monospace;font-weight:400;font-size:clamp(.72rem,2vw,1.05rem);margin:0;color:var(--acc);overflow-wrap:break-word;word-break:break-word}
+.shead .line{flex:1;height:3px;background:var(--line);min-width:12px}
+@media(max-width:640px){.shead{gap:10px;margin-bottom:18px}.shead h2{font-size:clamp(.68rem,3.4vw,.88rem);white-space:normal;line-height:1.45}}
 .viewall{color:var(--acc);text-decoration:none;font-size:1.3rem;white-space:nowrap}
 
 /* corner-bracket frame */

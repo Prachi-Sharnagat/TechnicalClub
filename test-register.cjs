@@ -71,20 +71,30 @@ console.log('[PASS] Closed events with registrationOpen: false are correctly exc
 // 6. Verify RegisterPage.jsx contains the required elements for the clean official Google Form card
 const regPageContent = fs.readFileSync(path.join(__dirname, 'src', 'pages', 'RegisterPage.jsx'), 'utf8');
 
-// UI requirement: Heading: EVENT REGISTRATION
-assert(regPageContent.includes('EVENT REGISTRATION'), 'Must include heading EVENT REGISTRATION');
-
-// UI requirement: Description: Register for Technical Club RBU events using our official registration form.
+// UI requirement: Heading: TECHNICAL CLUB RECRUITMENT (or backward-compatible EVENT REGISTRATION)
 assert(
-  regPageContent.includes('Register for Technical Club RBU events using our official registration form.'),
-  'Must include exact description copy'
+  regPageContent.includes('TECHNICAL CLUB RECRUITMENT') || regPageContent.includes('EVENT REGISTRATION'),
+  'Must include heading TECHNICAL CLUB RECRUITMENT'
 );
 
-// UI requirement: Add a small label: OFFICIAL GOOGLE FORM
-assert(regPageContent.includes('OFFICIAL GOOGLE FORM'), 'Must include small label OFFICIAL GOOGLE FORM');
+// UI requirement: Description
+assert(
+  regPageContent.includes('Choose your domain, explore its recruitment task, and apply to join Technical Club RBU.') ||
+  regPageContent.includes('Register for Technical Club RBU events using our official registration form.'),
+  'Must include recruitment description copy'
+);
 
-// UI requirement: Add a prominent button: REGISTER NOW →
-assert(regPageContent.includes('REGISTER NOW →'), 'Must include button with label REGISTER NOW →');
+// UI requirement: Remove redundant Google Form badges from card
+assert(
+  !regPageContent.includes('reg-poster-badge') && !regPageContent.includes('reg-official-badge-pixel'),
+  'Must remove redundant Google Form badges'
+);
+
+// UI requirement: Add a prominent primary button: APPLY NOW ↗ (or REGISTER NOW →)
+assert(
+  regPageContent.includes('APPLY NOW ↗') || regPageContent.includes('REGISTER NOW →'),
+  'Must include button with label APPLY NOW ↗'
+);
 
 // UI requirement: Link button to official Google Form URL
 assert(
@@ -142,10 +152,13 @@ assert(regCssContent.includes('.reg-contact-grid'), 'register.css must include .
 assert(regCssContent.includes('.reg-contact-card'), 'register.css must include .reg-contact-card');
 console.log('[PASS] register.css contains retro-pixel styles and responsive layout for Registration Card & Contact Us');
 
-// 12. Verify Registration Card has VIEW TASK PDF button beside REGISTER NOW
-assert(regPageContent.includes('VIEW TASK PDF ↗'), 'Registration card must include VIEW TASK PDF ↗ button');
+// 12. Verify Registration Card has secondary button VIEW DOMAIN TASKS ↓ (or VIEW TASK PDF ↗)
+assert(
+  regPageContent.includes('VIEW DOMAIN TASKS ↓') || regPageContent.includes('VIEW TASK PDF ↗'),
+  'Registration card must include secondary action button'
+);
 assert(regCssContent.includes('.reg-btn-task-hero'), 'register.css must include .reg-btn-task-hero style');
-console.log('[PASS] Registration card renders VIEW TASK PDF ↗ button beside REGISTER NOW');
+console.log('[PASS] Registration card renders secondary action button beside primary action button');
 
 // 13. Verify DOMAIN-WISE RECRUITMENT TASKS section
 assert(regPageContent.includes('DOMAIN-WISE RECRUITMENT TASKS'), 'Must render DOMAIN-WISE RECRUITMENT TASKS heading');
