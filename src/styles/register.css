@@ -94,21 +94,22 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0.42;
-  filter: contrast(1.15) brightness(0.85);
+  opacity: 0.95;
+  filter: contrast(1.1) brightness(0.95);
   transition: transform 0.4s ease, opacity 0.3s ease;
   display: block;
 }
 
 .reg-featured-card:hover .reg-decorative-img {
-  transform: scale(1.04);
-  opacity: 0.52;
+  transform: scale(1.03);
+  opacity: 1;
 }
 
 .reg-decorative-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(8, 11, 22, 0.5) 0%, rgba(8, 11, 22, 0.88) 100%);
+  background: linear-gradient(180deg, rgba(8, 11, 22, 0.2) 0%, rgba(8, 11, 22, 0.45) 100%);
+  pointer-events: none;
 }
 
 .reg-decorative-scan {
@@ -1114,21 +1115,42 @@
     max-width: 100%;
     box-sizing: border-box;
   }
-  /* Hide the desktop decorative poster box on mobile to eliminate vertical bloat */
+  /* Display the recruitment domains artwork banner at the top of the card on mobile */
   .reg-poster-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
+    min-height: 160px;
+    border: 3px solid var(--line);
+    box-shadow: 4px 4px 0 var(--shade);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 6px;
+    background: #080b16;
+  }
+  .reg-mobile-logo-wrap {
     display: none;
   }
-  /* Mobile-only logo centered neatly at the top of the card */
-  .reg-mobile-logo-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 6px;
+  .reg-official-art {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 4;
   }
-  .reg-mobile-logo {
-    width: clamp(95px, 26vw, 120px);
-    height: auto;
-    aspect-ratio: 1 / 1;
+  .reg-official-glow {
+    display: none;
+  }
+  .reg-official-logo {
+    width: 44px;
+    height: 44px;
+    padding: 3px;
+    border-radius: 4px;
+    border: 2px solid var(--acc);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(91, 140, 255, 0.5);
   }
   .reg-badge-row {
     justify-content: center;
