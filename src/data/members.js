@@ -12,24 +12,33 @@ export const RINGS = [
 const ROLES = ['Web Developer', 'AI Enthusiast', 'Robotics Builder', 'UI Designer', 'Video Editor', 'Embedded Dev', 'Content Creator', 'App Developer'];
 // use this to add all the clubmember info 
 //once done replace the below array.from with array.map and make all the related changes
-const membersInfo=[{}]
-export const MEMBERS = Array.from({ length: 30 }, (_, i) =>
-  i === 0
-    ? {
-        name: 'Devansh Tiwari',
-        role: 'Web Developer | AI Enthusiast | Student',
-        bio: 'Passionate about building clean and interactive web experiences.',
-        photo: '',
-        links: { github: '', linkedin: '', email: '', site: '' } // fill in: full URLs, email as plain address
-      }
-    : {
-        name: `Member ${String(i + 1).padStart(2, '0')}`,
-        role: ROLES[i % ROLES.length],
-        bio: 'Add a short line about this member in src/data/members.js.',
-        photo: '',
-        links: { github: '', linkedin: '', email: '', site: '' }
-      }
-);
+export const MEMBERS = Array.from({ length: 30 }, (_, i) => {
+  if (i === 0) {
+    return {
+      name: 'Siddhant Deshmukh',
+      role: 'Technical Club Coordinator (TCC)',
+      bio: 'Technical Club Coordinator leading technical initiatives, project collaborations, and student activities.',
+      photo: '',
+      links: { github: '', linkedin: '', email: '', site: '' }
+    };
+  }
+  if (i === 1) {
+    return {
+      name: 'Devansh Tiwari',
+      role: 'Web Developer | AI Enthusiast | Student',
+      bio: 'Passionate about building clean and interactive web experiences.',
+      photo: '',
+      links: { github: '', linkedin: '', email: '', site: '' } // fill in: full URLs, email as plain address
+    };
+  }
+  return {
+    name: `Member ${String(i + 1).padStart(2, '0')}`,
+    role: ROLES[(i - 1) % ROLES.length],
+    bio: 'Add a short line about this member in src/data/members.js.',
+    photo: '',
+    links: { github: '', linkedin: '', email: '', site: '' }
+  };
+});
 
 // Split members across the rings in order; id = position in MEMBERS
 let n = 0;

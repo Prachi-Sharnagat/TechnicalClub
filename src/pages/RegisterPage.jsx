@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { EVENTS_DATA, GOOGLE_FORM_URL } from '../data/events';
+import { EVENTS_DATA, OFFICIAL_REGISTRATION_FORM_URL, GOOGLE_FORM_URL } from '../data/events';
 import { CLUB_CONTACT } from '../data/contact';
+import { RECRUITMENT_TASKS, MASTER_AUDITION_PDF, MASTER_AUDITION_FILENAME } from '../data/recruitmentTasks';
 import EventRegistrationModal from '../components/events/EventRegistrationModal';
 import SecHead from '../components/graphics/SecHead';
 import Px from '../components/graphics/Px';
@@ -13,7 +14,19 @@ export default function RegisterPage() {
   const [searchParams] = useSearchParams();
   const [modalEvent, setModalEvent] = useState(null);
   const [internalEvent, setInternalEvent] = useState(null);
+  const [selectedDomain, setSelectedDomain] = useState(() => searchParams.get('domain') || null);
   const triggerRef = useRef(null);
+
+  useEffect(() => {
+    const d = searchParams.get('domain');
+    if (d) setSelectedDomain(d);
+  }, [searchParams]);
+
+  const activeTask = RECRUITMENT_TASKS.find(
+    (t) =>
+      t.slug.toLowerCase() === (selectedDomain || '').toLowerCase() ||
+      t.id.toLowerCase() === (selectedDomain || '').toLowerCase()
+  );
 
   // Filter events strictly open for registration (excluding past/closed events)
   const openEvents = EVENTS_DATA.filter(
@@ -62,115 +75,196 @@ export default function RegisterPage() {
         </p>
       </div>
 
-      {/* Case 1: No events currently open */}
-      {openEvents.length === 0 ? (
-        <div className="win reg-empty-win" role="status" aria-live="polite">
-          <div className="bar">
-            <i aria-hidden="true" />
-            <span>PORTAL NOTICE // STATUS IDLE</span>
+      {/* Clean Official Google Form Event-Registration Card */}
+      <motion.section
+        className="reg-featured-card reg-official-card"
+        aria-label="Official Technical Club RBU Event Registration"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+      >
+        {/* Retro Pixel Art Box */}
+        <div className="reg-poster-box reg-official-poster-box">
+          <div className="reg-official-art">
+            <div className="reg-official-glow" aria-hidden="true" />
+            <img
+              src="/technical-club-logo.png"
+              alt="Technical Club RBU Official Logo"
+              className="reg-official-logo"
+              width="140"
+              height="140"
+              loading="lazy"
+            />
+            <div className="reg-official-badge-pixel">
+              <Px name="chip" className="inl" />
+              <span>OFFICIAL FORM</span>
+            </div>
           </div>
-          <div style={{ padding: '32px 20px' }}>
-            <div className="reg-empty-icon" aria-hidden="true">
-              <Px name="chip" />
+          <span className="reg-poster-badge">GOOGLE FORM</span>
+        </div>
+
+        {/* Card Details */}
+        <div className="reg-details-box">
+          <div className="reg-badge-row">
+            <span className="reg-status-pill open">
+              🟢 REGISTRATION OPEN
+            </span>
+            <span className="reg-category-pill reg-google-form-pill">
+              OFFICIAL GOOGLE FORM
+            </span>
+            <span className="reg-organizer-pill">
+              // Technical Club RBU
+            </span>
+          </div>
+
+          <h1 className="reg-event-title">EVENT REGISTRATION</h1>
+          <p className="reg-tagline">Technical Club RBU Official Portal</p>
+          <p className="reg-description">
+            Register for Technical Club RBU events using our official registration form.
+          </p>
+
+          {/* Structured Details Strip */}
+          <div className="reg-meta-list reg-official-meta-list">
+            <div className="reg-meta-item">
+              <span className="reg-meta-label">PORTAL:</span>
+              <span className="reg-meta-val">Google Forms</span>
             </div>
-            <h2 className="reg-empty-title">REGISTRATIONS CURRENTLY PAUSED</h2>
-            <p className="reg-empty-msg">
-              No events are currently open for registration. Check back soon!
-            </p>
-            <div className="reg-empty-actions">
-              <Link to="/events" className="btn go">
-                EXPLORE ALL EVENTS
-              </Link>
-              <Link to="/" className="btn">
-                RETURN HOME
-              </Link>
+
+            <div className="reg-meta-item">
+              <span className="reg-meta-label">STATUS:</span>
+              <span className="reg-meta-val">Accepting Entries</span>
             </div>
+
+            <div className="reg-meta-item">
+              <span className="reg-meta-label">ACCESS:</span>
+              <span className="reg-meta-val">Instant Confirmation</span>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="reg-actions-row">
+            <a
+              href={OFFICIAL_REGISTRATION_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn go reg-btn-main reg-btn-official"
+              aria-label="Register now for Technical Club RBU events via official Google Form (opens in a new tab)"
+            >
+              <span>REGISTER NOW →</span>
+            </a>
+            <a
+              href={activeTask ? activeTask.pdfUrl : (MASTER_AUDITION_PDF || '#domain-tasks')}
+              target={activeTask || MASTER_AUDITION_PDF ? '_blank' : undefined}
+              rel={activeTask || MASTER_AUDITION_PDF ? 'noopener noreferrer' : undefined}
+              className="btn reg-btn-main reg-btn-task-hero"
+              aria-label={
+                activeTask
+                  ? `View ${activeTask.name} task PDF (opens in a new tab)`
+                  : 'View Technical Club audition task PDF (opens in a new tab)'
+              }
+            >
+              <span>VIEW TASK PDF ↗</span>
+            </a>
+            {activeTask && (
+              <div className="reg-selected-domain-pill">
+                <span>TASK: {activeTask.name}</span>
+                <button
+                  type="button"
+                  onClick={() => setSelectedDomain(null)}
+                  className="reg-clear-domain-btn"
+                  title="Clear domain selection"
+                  aria-label="Clear domain selection"
+                >
+                  ✕
+                </button>
+              </div>
+            )}
           </div>
         </div>
-      ) : (
-        <>
-          {/* Case 2: Featured Current Live Event (Robo Drive) */}
-          {featuredEvent && (
-            <motion.section
-              className="reg-featured-card"
-              aria-label={`Featured Registration: ${featuredEvent.title}`}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-            >
-              {/* Event Poster */}
-              <div className="reg-poster-box">
-                {featuredEvent.poster ? (
-                  <img
-                    src={featuredEvent.poster}
-                    alt={featuredEvent.posterAlt || `${featuredEvent.title} Official Poster`}
-                    className="reg-poster-img"
-                  />
+      </motion.section>
+
+      {/* DOMAIN-WISE RECRUITMENT TASKS SECTION */}
+      <motion.section
+        id="domain-tasks"
+        className="reg-tasks-section"
+        aria-labelledby="reg-tasks-heading"
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4 }}
+      >
+        <div className="reg-header-block">
+          <SecHead title="DOMAIN-WISE RECRUITMENT TASKS" />
+          <p className="reg-subtitle">
+            Choose your domain, open the task PDF, and follow the instructions before applying.
+          </p>
+        </div>
+
+        {/* Master Audition Booklet Bar */}
+        <div className="reg-tasks-master-bar">
+          <span className="reg-master-label">// ALL-IN-ONE AUDITION BOOKLET:</span>
+          <a
+            href={MASTER_AUDITION_PDF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="reg-master-link"
+            aria-label="View complete Technical Club audition tasks PDF for all domains"
+          >
+            <span>{MASTER_AUDITION_FILENAME} (All Domains) ↗</span>
+          </a>
+        </div>
+
+        <div className="reg-tasks-grid">
+          {RECRUITMENT_TASKS.map((task, idx) => {
+            const isSelected =
+              selectedDomain &&
+              (selectedDomain.toLowerCase() === task.slug.toLowerCase() ||
+                selectedDomain.toLowerCase() === task.id.toLowerCase());
+            return (
+              <motion.div
+                key={task.slug}
+                className={`br reg-task-card${isSelected ? ' selected' : ''}`}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: idx * 0.05 }}
+              >
+                <div className="reg-task-top">
+                  <div className="svc-ic">
+                    <Px name={task.icon} />
+                  </div>
+                  <span className="reg-task-num">// DOMAIN 0{idx + 1}</span>
+                </div>
+
+                <h3 className="reg-task-title">{task.name}</h3>
+                <p className="reg-task-desc">{task.description}</p>
+
+                {task.pdfUrl ? (
+                  <a
+                    href={task.pdfUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn go reg-task-btn"
+                    onClick={() => setSelectedDomain(task.slug)}
+                    aria-label={`View task PDF for ${task.name} (opens in a new tab)`}
+                  >
+                    <span>VIEW TASK PDF →</span>
+                  </a>
                 ) : (
-                  <div className="reg-poster-img" style={{ display: 'grid', placeItems: 'center', background: 'var(--panel)' }}>
-                    <Px name="bot" />
-                  </div>
-                )}
-                <span className="reg-poster-badge">
-                  {featuredEvent.badge || 'LIVE REGISTRATION'}
-                </span>
-              </div>
-
-              {/* Event Details */}
-              <div className="reg-details-box">
-                <div className="reg-badge-row">
-                  <span className="reg-status-pill open">
-                    🟢 REGISTRATION OPEN
-                  </span>
-                  <span className="reg-category-pill">
-                    {featuredEvent.category || 'FEATURED EVENT'}
-                  </span>
-                  {featuredEvent.organizer && (
-                    <span className="reg-organizer-pill">
-                      // {featuredEvent.organizer}
-                    </span>
-                  )}
-                </div>
-
-                <h1 className="reg-event-title">{featuredEvent.title}</h1>
-                <p className="reg-tagline">{featuredEvent.tagline}</p>
-                <p className="reg-description">{featuredEvent.description}</p>
-
-                {/* Structured Event Details: Date, Time, Venue */}
-                <div className="reg-meta-list">
-                  <div className="reg-meta-item">
-                    <span className="reg-meta-label">DATE:</span>
-                    <span className="reg-meta-val">{featuredEvent.date}</span>
-                  </div>
-
-                  <div className="reg-meta-item">
-                    <span className="reg-meta-label">TIME:</span>
-                    <span className="reg-meta-val">{featuredEvent.time}</span>
-                  </div>
-
-                  <div className="reg-meta-item reg-meta-venue">
-                    <span className="reg-meta-label">VENUE:</span>
-                    <span className="reg-meta-val">{featuredEvent.venue}</span>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="reg-actions-row">
                   <button
                     type="button"
-                    className="btn go reg-btn-main"
-                    onClick={(e) => handleRegisterClick(featuredEvent, e)}
-                    aria-haspopup="dialog"
+                    disabled
+                    className="btn reg-task-btn reg-task-btn-disabled"
+                    aria-disabled="true"
                   >
-                    <span>REGISTER NOW [⚡]</span>
-                    <Px name="arrow" className="inl" />
+                    <span>TASK PDF COMING SOON</span>
                   </button>
-                </div>
-              </div>
-            </motion.section>
-          )}
-        </>
-      )}
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.section>
 
       {/* Visually Distinct Contact Us Section */}
       <motion.section

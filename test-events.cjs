@@ -47,24 +47,24 @@ assert(EVENT_CATEGORIES[0].id === 'ongoing', 'First category is ongoing');
 assert(EVENT_CATEGORIES[1].id === 'upcoming', 'Second category is upcoming');
 assert(EVENT_CATEGORIES[2].id === 'past', 'Third category is past');
 
-// 2. Ongoing Event - Robo Drive
-const ongoing = getEventsByStatus('ongoing');
-assert(ongoing.length >= 1, 'Ongoing events exist');
-const robo = ongoing[0];
-assert(robo.title === 'ROBO DRIVE', 'First event is ROBO DRIVE');
+// 2. Past Event - Robo Drive
+const past = getEventsByStatus('past');
+assert(past.length >= 4, 'Four past events exist');
+const robo = past.find(e => e.slug === 'robo-drive');
+assert(Boolean(robo), 'ROBO DRIVE is in past events');
+assert(robo.title === 'ROBO DRIVE', 'Event title is ROBO DRIVE');
 assert(robo.organizer === 'Technical Club RBU', 'Organizer is Technical Club RBU');
 assert(robo.tagline === 'Crafted for Speed. Engineered for Precision.', 'Tagline is exact');
 assert(robo.date === '22 October 2026', 'Date is 22 October 2026');
 assert(robo.time === '10:00 AM onwards', 'Time is 10:00 AM onwards');
 assert(robo.venue === 'Digital Tower, Ground Floor Common Area', 'Venue is Digital Tower, Ground Floor Common Area');
-assert(robo.displayStatus === 'ongoing', 'displayStatus is ongoing');
-assert(robo.registrationOpen === true, 'registrationOpen is true');
-assert(robo.registrationType === 'google-form', 'registrationType is google-form');
-assert(robo.registrationUrl === 'https://docs.google.com/forms/d/e/1FAIpQLSfice9Ifzg7YpWEtqGTf3QvIVXtpg9M4_yfXXg_Y2Iv2dfFCw/viewform', 'registrationUrl matches approved Google Form');
+assert(robo.displayStatus === 'past', 'displayStatus is past');
+assert(robo.status === 'Completed', 'status is Completed');
+assert(robo.registrationOpen === false, 'registrationOpen is false for concluded event');
+assert(robo.badge === 'COMPLETED', 'badge is COMPLETED');
 assert(robo.poster === 'mock-robodrive.jpg', 'Robo Drive poster is imported');
 
 // 3. Past Event - GrandMaster's Jeopardy
-const past = getEventsByStatus('past');
 const jeopardy = past.find(e => e.title.includes("GrandMaster's Jeopardy"));
 assert(Boolean(jeopardy), "Marvel Assemble: GrandMaster's Jeopardy is in past events");
 assert(jeopardy.theme === 'Marvel Assemble', 'Theme is Marvel Assemble');
@@ -77,8 +77,8 @@ assert(jeopardy.poster === 'mock-jeopardy.webp', 'Poster is imported');
 
 // 4. Backwards compatibility
 assert(Array.isArray(UPCOMING) && UPCOMING.length === 3, 'UPCOMING export intact');
-assert(Array.isArray(COMPLETED) && COMPLETED.length === 3, 'COMPLETED export intact');
-assert(Array.isArray(ONGOING) && ONGOING.length === 1, 'ONGOING export intact');
+assert(Array.isArray(COMPLETED) && COMPLETED.length === 4, 'COMPLETED export intact (4 past events)');
+assert(Array.isArray(ONGOING) && ONGOING.length === 0, 'ONGOING export intact (0 active)');
 
 console.log(`\nResults: ${passed} passed, ${failed} failed.`);
 if (failed > 0) process.exit(1);

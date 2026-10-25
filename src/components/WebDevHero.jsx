@@ -16,7 +16,13 @@ export default function WebDevHero({ ready }) {
           {WEBDEV.intro}
         </motion.p>
         <motion.div className="cta" initial={{ opacity: 0, y: 16 }} animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} transition={sm(0.7, 0.55)}>
-          <a className="btn go" href="#join">
+          <a
+            className="btn go"
+            href="/web-dev-guide.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Join Web Dev - Opens recruitment task guide PDF in new tab"
+          >
             JOIN WEB DEV
           </a>
           <a className="btn" href="#path">

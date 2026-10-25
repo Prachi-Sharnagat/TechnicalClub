@@ -19,6 +19,39 @@ const BITS = {
     'X....X..X',
     'XXXXXXXXX'
   ],
+  cube: [
+    'XXXXXXXXX',
+    'X.......X',
+    'X...X...X',
+    'X..XXX..X',
+    'X.XXXXX.X',
+    'X.X.X.X.X',
+    'X.X.X.X.X',
+    'X..XXX..X',
+    'XXXXXXXXX'
+  ],
+  box: [
+    'XXXXXXXXX',
+    'X.......X',
+    'X...X...X',
+    'X..XXX..X',
+    'X.XXXXX.X',
+    'X.X.X.X.X',
+    'X.X.X.X.X',
+    'X..XXX..X',
+    'XXXXXXXXX'
+  ],
+  '3d': [
+    'XXXXXXXXX',
+    'X.......X',
+    'X...X...X',
+    'X..XXX..X',
+    'X.XXXXX.X',
+    'X.X.X.X.X',
+    'X.X.X.X.X',
+    'X..XXX..X',
+    'XXXXXXXXX'
+  ],
   mail: [
     'XXXXXXXXXXX',
     'XX.......XX',

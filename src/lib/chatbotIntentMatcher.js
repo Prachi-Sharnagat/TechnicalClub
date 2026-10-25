@@ -57,9 +57,10 @@ const INTENT_RULES = [
       /\belectronics\s*(\&|and)?\s*robotics\b/i,
       /\bvideo\s*editing\b/i,
       /\bpublicity(\s*(\&|and)?\s*outreach)?\b/i,
+      /\b(3d\s*)?modell?ing\b/i,
       /\btracks\b/i
     ],
-    keywords: ['domain', 'domains', 'web', 'graphics', 'electronics', 'hardware', 'davinci', 'arduino', 'publicity', 'outreach']
+    keywords: ['domain', 'domains', 'web', 'graphics', 'electronics', 'hardware', 'davinci', 'arduino', 'publicity', 'outreach', '3d', 'modelling', 'modeling', 'blender', 'render']
   },
 
   // 4. Registrations
