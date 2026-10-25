@@ -37,8 +37,9 @@ export default function EventsManager() {
       // Storage access blocked/restricted
     }
 
-    // Default to ongoing so ROBO DRIVE is prominently shown
-    return 'ongoing';
+    // Default to ongoing if it has events, otherwise past
+    const hasOngoing = EVENTS_DATA.some((e) => e.displayStatus === 'ongoing');
+    return hasOngoing ? 'ongoing' : 'past';
   }, [searchParams]);
 
   const [activeCategory, setActiveCategory] = useState(initialCategory);

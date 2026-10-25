@@ -8,6 +8,7 @@ import posterShinobi from '../assets/pst4.webp';
 export const REGISTER_URL = '/register';
 export const registerLink = (title) => `${REGISTER_URL}?event=${encodeURIComponent(title)}`;
 
+export const OFFICIAL_REGISTRATION_FORM_URL = 'https://forms.gle/hLqNfVHBEkY3NKcH6';
 export const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfice9Ifzg7YpWEtqGTf3QvIVXtpg9M4_yfXXg_Y2Iv2dfFCw/viewform';
 export const GOOGLE_FORM_EMBED_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSfice9Ifzg7YpWEtqGTf3QvIVXtpg9M4_yfXXg_Y2Iv2dfFCw/viewform?embedded=true';
 
@@ -18,35 +19,14 @@ export const HERO = {
 };
 
 export const EVENT_CATEGORIES = [
-  { id: 'ongoing', label: 'ONGOING EVENTS', shortLabel: 'ONGOING', count: 1 },
+  { id: 'ongoing', label: 'ONGOING EVENTS', shortLabel: 'ONGOING', count: 0 },
   { id: 'upcoming', label: 'UPCOMING EVENTS', shortLabel: 'UPCOMING', count: 3 },
-  { id: 'past', label: 'PAST EVENTS', shortLabel: 'PAST', count: 3 }
+  { id: 'past', label: 'PAST EVENTS', shortLabel: 'PAST', count: 4 }
 ];
 
 export const EVENTS_DATA = [
   // --- ONGOING EVENTS ---
-  {
-    id: 'robo-drive-2026',
-    title: 'ROBO DRIVE',
-    slug: 'robo-drive',
-    organizer: 'Technical Club RBU',
-    tagline: 'Crafted for Speed. Engineered for Precision.',
-    description: 'A premier robotics race where participants pilot high-performance RC cars engineered by Technical Club RBU across a specially designed obstacle arena with thrilling speed runs and precision track challenges.',
-    date: '22 October 2026',
-    time: '10:00 AM onwards',
-    venue: 'Digital Tower, Ground Floor Common Area',
-    poster: posterRoboDrive,
-    posterAlt: 'Official Robo Drive event poster - Technical Club RBU',
-    category: 'ROBOTICS',
-    displayStatus: 'ongoing',
-    registrationOpen: true,
-    registrationType: 'google-form',
-    registrationUrl: GOOGLE_FORM_URL,
-    embedUrl: GOOGLE_FORM_EMBED_URL,
-    featured: true,
-    sortOrder: 1,
-    badge: 'LIVE REGISTRATION'
-  },
+  // (No live ongoing events currently active)
 
   // --- UPCOMING EVENTS ---
   {
@@ -68,7 +48,7 @@ export const EVENTS_DATA = [
     registrationOpen: true,
     registrationType: 'internal',
     registrationUrl: registerLink('Web Dev Workshop'),
-    featured: false,
+    featured: true,
     sortOrder: 1,
     facts: ['Hands-on project', 'Beginners welcome', 'Slots: 10 AM - 6 PM']
   },
@@ -121,6 +101,35 @@ export const EVENTS_DATA = [
 
   // --- PAST EVENTS ---
   {
+    id: 'robo-drive-2026',
+    title: 'ROBO DRIVE',
+    slug: 'robo-drive',
+    organizer: 'Technical Club RBU',
+    tagline: 'Crafted for Speed. Engineered for Precision.',
+    description: 'A premier robotics race where participants pilot high-performance RC cars engineered by Technical Club RBU across a specially designed obstacle arena with thrilling speed runs and precision track challenges.',
+    date: '22 October 2026',
+    time: '10:00 AM onwards',
+    venue: 'Digital Tower, Ground Floor Common Area',
+    poster: posterRoboDrive,
+    posterAlt: 'Official Robo Drive event poster - Technical Club RBU',
+    alt: 'Official Robo Drive event poster - Technical Club RBU',
+    category: 'ROBOTICS',
+    kind: 'ROBOTICS',
+    displayStatus: 'past',
+    status: 'Completed',
+    registrationOpen: false,
+    registrationType: 'none',
+    registrationUrl: GOOGLE_FORM_URL,
+    embedUrl: GOOGLE_FORM_EMBED_URL,
+    featured: true,
+    sortOrder: 1,
+    badge: 'COMPLETED',
+    facts: [
+      'High-speed RC car obstacle course racing',
+      'Custom arena engineered by Technical Club RBU'
+    ]
+  },
+  {
     id: 'grandmasters-jeopardy',
     title: "Marvel Assemble: GrandMaster's Jeopardy",
     slug: 'grandmasters-jeopardy',
@@ -137,10 +146,11 @@ export const EVENTS_DATA = [
     venue: 'DT-702',
     poster: posterJeopardy,
     posterAlt: "Marvel Assemble GrandMaster's Jeopardy event poster",
+    alt: "Marvel Assemble GrandMaster's Jeopardy event poster",
     registrationOpen: false,
     registrationType: 'none',
-    featured: true,
-    sortOrder: 1,
+    featured: false,
+    sortOrder: 2,
     badge: 'COMPLETED',
     facts: [
       'Prize pool Rs. 3000'
@@ -159,10 +169,11 @@ export const EVENTS_DATA = [
     status: 'Completed',
     poster: posterRobo,
     posterAlt: 'Robo Mania robotics tournament poster',
+    alt: 'Robo Mania robotics tournament poster',
     registrationOpen: false,
     registrationType: 'none',
     featured: false,
-    sortOrder: 2,
+    sortOrder: 3,
     badge: 'COMPLETED',
     facts: [
       '3 rounds: Kaun Banega Robopati, Rush Hour, Robo Soccer',
@@ -185,10 +196,11 @@ export const EVENTS_DATA = [
     venue: 'Online Coding Contest',
     poster: posterShinobi,
     posterAlt: 'Shinobi Showdown online coding contest poster',
+    alt: 'Shinobi Showdown online coding contest poster',
     registrationOpen: false,
     registrationType: 'none',
     featured: false,
-    sortOrder: 3,
+    sortOrder: 4,
     badge: 'COMPLETED',
     facts: [
       'With Coding Ninjas'

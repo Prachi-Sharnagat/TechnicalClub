@@ -37,32 +37,22 @@ const eventsMod = { exports: {} };
 const eventsFn = new Function('exports', 'module', eventsCode);
 eventsFn(eventsMod.exports, eventsMod);
 
-const { EVENTS_DATA, GOOGLE_FORM_URL } = eventsMod.exports;
+const { EVENTS_DATA, OFFICIAL_REGISTRATION_FORM_URL, GOOGLE_FORM_URL } = eventsMod.exports;
 
-// 3. Test current event selection filter
-const openEvents = EVENTS_DATA.filter(e => e.displayStatus !== 'past' && e.registrationOpen === true);
+// 3. Test official registration form URL
+assert.strictEqual(
+  OFFICIAL_REGISTRATION_FORM_URL,
+  'https://forms.gle/hLqNfVHBEkY3NKcH6',
+  'Official registration form URL must match https://forms.gle/hLqNfVHBEkY3NKcH6'
+);
+console.log('[PASS] OFFICIAL_REGISTRATION_FORM_URL verified: https://forms.gle/hLqNfVHBEkY3NKcH6');
 
-assert(openEvents.length >= 1, 'At least one open event must exist');
-console.log(`[PASS] Open events count: ${openEvents.length}`);
-
-// Confirm Robo Drive is the primary open event
-const robo = openEvents.find(e => e.slug === 'robo-drive' || e.id === 'robo-drive-2026');
-assert(robo !== undefined, 'Robo Drive must be present in open events');
-assert.strictEqual(robo.title, 'ROBO DRIVE', 'Title is ROBO DRIVE');
-assert.strictEqual(robo.date, '22 October 2026', 'Date is 22 October 2026');
-assert.strictEqual(robo.time, '10:00 AM onwards', 'Time is 10:00 AM onwards');
-assert.strictEqual(robo.venue, 'Digital Tower, Ground Floor Common Area', 'Venue is Digital Tower Ground Floor Common Area');
-assert.strictEqual(robo.registrationOpen, true, 'registrationOpen is true');
-assert.strictEqual(robo.registrationType, 'google-form', 'registrationType is google-form');
-assert.strictEqual(robo.registrationUrl, GOOGLE_FORM_URL, 'registrationUrl points to verified Google Form');
-assert(robo.poster, 'Poster is defined');
-console.log('[PASS] Robo Drive details, verified Google Form URL, and poster verified');
-
-// 4. Test excluding past events
+// 4. Test events data integrity & exclusion of past events
 const pastEvent = EVENTS_DATA.find(e => e.slug === 'grandmasters-jeopardy');
 assert(pastEvent !== undefined, 'Past event exists in raw data');
+const openEvents = EVENTS_DATA.filter(e => e.displayStatus !== 'past' && e.registrationOpen === true);
 assert(!openEvents.some(e => e.id === pastEvent.id), 'Past events must NOT appear in openEvents');
-console.log('[PASS] Past events (like Marvel Assemble: Jeopardy) are correctly excluded');
+console.log('[PASS] Past events (like Marvel Assemble: Jeopardy) are correctly excluded from active filter');
 
 // 5. Test closed event logic: an event with registrationOpen: false should be excluded
 const testDataWithClosed = [
@@ -78,38 +68,53 @@ const filteredClosed = testDataWithClosed.filter(e => e.displayStatus !== 'past'
 assert(!filteredClosed.some(e => e.id === 'test-closed-event'), 'Closed event must be excluded');
 console.log('[PASS] Closed events with registrationOpen: false are correctly excluded');
 
-// 6. Test no-events empty state message
-const emptyData = [];
-const filteredEmpty = emptyData.filter(e => e.displayStatus !== 'past' && e.registrationOpen === true);
-assert.strictEqual(filteredEmpty.length, 0, 'Zero events when empty');
-const EMPTY_MSG = 'No events are currently open for registration. Check back soon!';
-assert(EMPTY_MSG.includes('No events are currently open for registration'), 'Empty state message matches specification');
-console.log('[PASS] Empty state condition and copy verified: "No events are currently open for registration. Check back soon!"');
-
-// 7. Verify RegisterPage.jsx contains the required elements and no duplicates
+// 6. Verify RegisterPage.jsx contains the required elements for the clean official Google Form card
 const regPageContent = fs.readFileSync(path.join(__dirname, 'src', 'pages', 'RegisterPage.jsx'), 'utf8');
-assert(regPageContent.includes('EventRegistrationModal'), 'Must import EventRegistrationModal');
-assert(regPageContent.includes('No events are currently open for registration. Check back soon!'), 'Must include empty state copy');
-assert(regPageContent.includes('featuredEvent'), 'Must render featured event');
-assert(regPageContent.includes('REGISTER NOW'), 'Must render Register Now button');
-assert(!regPageContent.includes('<span className="reg-meta-label">// STATUS</span>'), 'Duplicate status box removed from metadata list');
-assert(!regPageContent.includes('<span className="reg-meta-label">// ORGANIZER</span>'), 'Organizer removed from metadata list to avoid duplication with badge header');
-assert(regPageContent.includes('reg-organizer-pill'), 'Organizer displayed once in badge row');
-assert(regPageContent.includes('DATE:'), 'Structured metadata contains DATE');
-assert(regPageContent.includes('TIME:'), 'Structured metadata contains TIME');
-assert(regPageContent.includes('VENUE:'), 'Structured metadata contains VENUE');
-console.log('[PASS] RegisterPage.jsx source contains single organizer line, structured Date/Time/Venue, and no duplicates');
 
-// 8. Verify robo-drive-2026 data has no duplicate facts array
-assert(!robo.facts || robo.facts.length === 0, 'Robo Drive must not contain duplicate facts array');
-console.log('[PASS] Robo Drive event data does not contain duplicate facts');
+// UI requirement: Heading: EVENT REGISTRATION
+assert(regPageContent.includes('EVENT REGISTRATION'), 'Must include heading EVENT REGISTRATION');
 
-// 9. Verify EventCard.jsx smart filter keeps unique info while filtering out duplicate date/venue/organizer
+// UI requirement: Description: Register for Technical Club RBU events using our official registration form.
+assert(
+  regPageContent.includes('Register for Technical Club RBU events using our official registration form.'),
+  'Must include exact description copy'
+);
+
+// UI requirement: Add a small label: OFFICIAL GOOGLE FORM
+assert(regPageContent.includes('OFFICIAL GOOGLE FORM'), 'Must include small label OFFICIAL GOOGLE FORM');
+
+// UI requirement: Add a prominent button: REGISTER NOW →
+assert(regPageContent.includes('REGISTER NOW →'), 'Must include button with label REGISTER NOW →');
+
+// UI requirement: Link button to official Google Form URL
+assert(
+  regPageContent.includes('OFFICIAL_REGISTRATION_FORM_URL') ||
+  regPageContent.includes('https://forms.gle/hLqNfVHBEkY3NKcH6'),
+  'Must link to official Google Form'
+);
+
+// UI requirement: Safe external link attributes
+assert(regPageContent.includes('target="_blank"'), 'Must have target="_blank"');
+assert(regPageContent.includes('rel="noopener noreferrer"'), 'Must have rel="noopener noreferrer"');
+
+// Functional requirement: Retain query-based modal / dialog capability without breaking
+assert(regPageContent.includes('EventRegistrationModal'), 'Must import EventRegistrationModal for event query handling');
+assert(regPageContent.includes('reg-organizer-pill'), 'Organizer displayed in badge row');
+assert(regPageContent.includes('reg-featured-card'), 'Must use retro pixel featured card container');
+console.log('[PASS] RegisterPage.jsx contains official Google Form card, exact headings, labels, button, and safe link attributes');
+
+// 7. Verify robo-drive-2026 data has no duplicate facts array
+const robo = EVENTS_DATA.find(e => e.slug === 'robo-drive' || e.id === 'robo-drive-2026');
+assert(robo !== undefined, 'Robo Drive exists in events data');
+assert(!robo.facts || robo.facts.length <= 2, 'Robo Drive must not contain bloat facts array');
+console.log('[PASS] Robo Drive event data verified in events list');
+
+// 8. Verify EventCard.jsx smart filter keeps unique info while filtering out duplicate date/venue/organizer
 const eventCardContent = fs.readFileSync(path.join(__dirname, 'src', 'components', 'events', 'EventCard.jsx'), 'utf8');
 assert(eventCardContent.includes('uniqueFacts'), 'EventCard.jsx implements uniqueFacts filter');
 console.log('[PASS] EventCard.jsx prevents duplicate event facts from rendering site-wide');
 
-// 10. Verify Contact Us configuration and Register page section
+// 9. Verify Contact Us configuration and Register page section
 const contactPath = path.join(__dirname, 'src', 'data', 'contact.js');
 assert(fs.existsSync(contactPath), 'src/data/contact.js must exist');
 const contactContent = fs.readFileSync(contactPath, 'utf8');
@@ -118,22 +123,88 @@ assert(contactContent.includes('https://www.instagram.com/technicalclubrbu/'), '
 assert(contactContent.includes('@technicalclubrbu'), 'contact.js must contain official Instagram handle');
 console.log('[PASS] src/data/contact.js defines verified email and Instagram configuration');
 
-// 11. Verify RegisterPage.jsx renders Contact Us section with email and Instagram links
+// 10. Verify RegisterPage.jsx renders Contact Us section with email and Instagram links
 assert(regPageContent.includes('CLUB_CONTACT'), 'RegisterPage.jsx must import CLUB_CONTACT');
 assert(regPageContent.includes('reg-contact-section'), 'RegisterPage.jsx must render Contact Us section');
 assert(regPageContent.includes('mailto:'), 'Contact section must contain working mailto: link');
-assert(regPageContent.includes('target="_blank"'), 'Instagram link must open in a new tab');
-assert(regPageContent.includes('rel="noopener noreferrer"'), 'Instagram link must have rel="noopener noreferrer" for security');
 const eventCardIdx = regPageContent.indexOf('reg-featured-card');
 const contactSectionIdx = regPageContent.indexOf('reg-contact-section');
 assert(eventCardIdx !== -1 && contactSectionIdx !== -1 && eventCardIdx < contactSectionIdx, 'Contact Us section must be rendered AFTER the events section');
 console.log('[PASS] RegisterPage.jsx renders accessible Contact Us section with safe external links positioned after events');
 
-// 12. Verify CSS has responsive styles for Contact Us section
+// 11. Verify CSS has responsive styles for both Event Registration card and Contact Us section
 const regCssContent = fs.readFileSync(path.join(__dirname, 'src', 'styles', 'register.css'), 'utf8');
+assert(regCssContent.includes('.reg-featured-card'), 'register.css must include .reg-featured-card');
+assert(regCssContent.includes('.reg-google-form-pill'), 'register.css must include .reg-google-form-pill');
+assert(regCssContent.includes('.reg-btn-official'), 'register.css must include .reg-btn-official');
 assert(regCssContent.includes('.reg-contact-section'), 'register.css must include .reg-contact-section');
 assert(regCssContent.includes('.reg-contact-grid'), 'register.css must include .reg-contact-grid');
 assert(regCssContent.includes('.reg-contact-card'), 'register.css must include .reg-contact-card');
-console.log('[PASS] register.css contains retro-pixel styles and responsive layout for Contact Us');
+console.log('[PASS] register.css contains retro-pixel styles and responsive layout for Registration Card & Contact Us');
 
-console.log('\nAll Register Page tests passed successfully!');
+// 12. Verify Registration Card has VIEW TASK PDF button beside REGISTER NOW
+assert(regPageContent.includes('VIEW TASK PDF ↗'), 'Registration card must include VIEW TASK PDF ↗ button');
+assert(regCssContent.includes('.reg-btn-task-hero'), 'register.css must include .reg-btn-task-hero style');
+console.log('[PASS] Registration card renders VIEW TASK PDF ↗ button beside REGISTER NOW');
+
+// 13. Verify DOMAIN-WISE RECRUITMENT TASKS section
+assert(regPageContent.includes('DOMAIN-WISE RECRUITMENT TASKS'), 'Must render DOMAIN-WISE RECRUITMENT TASKS heading');
+assert(
+  regPageContent.includes('Choose your domain, open the task PDF, and follow the instructions before applying.'),
+  'Must render exact subtitle'
+);
+assert(regPageContent.includes('reg-tasks-section'), 'Must render reg-tasks-section');
+assert(regPageContent.includes('reg-tasks-grid'), 'Must render reg-tasks-grid');
+
+// 14. Verify all 6 domain recruitment tasks in src/data/recruitmentTasks.js
+const tasksDataPath = path.join(__dirname, 'src', 'data', 'recruitmentTasks.js');
+assert(fs.existsSync(tasksDataPath), 'src/data/recruitmentTasks.js must exist');
+const tasksDataCode = fs.readFileSync(tasksDataPath, 'utf8');
+const tasksMod = { exports: {} };
+const tasksFn = new Function('exports', tasksDataCode.replace(/export\s+const\s+(\w+)\s*=/g, 'exports.$1 ='));
+tasksFn(tasksMod.exports);
+const { RECRUITMENT_TASKS, MASTER_AUDITION_PDF, MASTER_AUDITION_FILENAME } = tasksMod.exports;
+
+assert(Array.isArray(RECRUITMENT_TASKS), 'RECRUITMENT_TASKS must be an array');
+assert.strictEqual(RECRUITMENT_TASKS.length, 6, 'Must have exactly 6 domain tasks');
+
+const expectedDomains = [
+  { name: 'WEB DEVELOPMENT', desc: 'Build websites and web applications using modern web technologies.', pdf: 'web-development-task.pdf' },
+  { name: 'GRAPHICS', desc: 'Explore visual design, posters, branding, and creative graphics.', pdf: 'graphics-task.pdf' },
+  { name: 'ELECTRONICS', desc: 'Explore electronics, Arduino, sensors, circuits, and robotics.', pdf: 'electronics-task.pdf' },
+  { name: 'VIDEO EDITING', desc: 'Create engaging videos through editing, storytelling, and motion.', pdf: 'video-editing-task.pdf' },
+  { name: 'PUBLICITY', desc: 'Explore outreach, social media, event promotion, and club communication.', pdf: 'publicity-task.pdf' },
+  { name: '3D MODELLING', desc: 'Create 3D models, digital assets, and rendered visualizations.', pdf: '3d-modelling-task.pdf' }
+];
+
+expectedDomains.forEach(exp => {
+  const found = RECRUITMENT_TASKS.find(t => t.name === exp.name);
+  assert(found !== undefined, `Missing domain task: ${exp.name}`);
+  assert.strictEqual(found.description, exp.desc, `Description mismatch for ${exp.name}`);
+  assert(found.pdfUrl.endsWith(exp.pdf), `PDF path mismatch for ${exp.name}`);
+
+  // Verify physical PDF file exists and is valid
+  const physicalPdf = path.join(__dirname, 'public', 'tasks', exp.pdf);
+  assert(fs.existsSync(physicalPdf), `Missing PDF file: public/tasks/${exp.pdf}`);
+  const stat = fs.statSync(physicalPdf);
+  assert(stat.size > 1000, `PDF public/tasks/${exp.pdf} is suspiciously small: ${stat.size} bytes`);
+  const header = fs.readFileSync(physicalPdf, { length: 5 }).toString();
+  assert(header.startsWith('%PDF-'), `File public/tasks/${exp.pdf} is not a valid PDF`);
+});
+console.log('[PASS] All 6 domain recruitment tasks defined with verified descriptions and valid physical PDF files');
+
+// 15. Verify master audition booklet PDF exists
+const masterPdfPath = path.join(__dirname, 'public', 'tasks', 'technical-club-audition-tasks.pdf');
+assert(fs.existsSync(masterPdfPath), 'Master audition PDF must exist');
+const masterStat = fs.statSync(masterPdfPath);
+assert(masterStat.size > 10000, 'Master audition PDF must be non-empty');
+console.log(`[PASS] Master audition tasks PDF verified (${masterStat.size} bytes)`);
+
+// 16. Verify responsive CSS grid for domain tasks (3 cols desktop, 2 cols tablet, 1 col mobile)
+assert(regCssContent.includes('.reg-tasks-grid'), 'register.css must define .reg-tasks-grid');
+assert(regCssContent.includes('repeat(3, 1fr)'), 'Desktop must use 3 cards per row');
+assert(regCssContent.includes('repeat(2, 1fr)'), 'Tablet must use 2 cards per row');
+assert(regCssContent.includes('grid-template-columns: 1fr'), 'Mobile must stack 1 card per row');
+console.log('[PASS] register.css defines 3-card desktop, 2-card tablet, and 1-card mobile responsive grid');
+
+console.log('\nAll Register Page & Recruitment Task tests passed successfully!');

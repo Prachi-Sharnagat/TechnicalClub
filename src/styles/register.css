@@ -17,18 +17,90 @@
   line-height: 1.25;
 }
 
-/* Featured Event Showcase (Robo Drive) */
+/* Featured Event Showcase & Official Registration Card */
 .reg-featured-card {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: 360px 1fr;
   gap: 36px;
-  background: rgba(15, 21, 38, 0.75);
+  background: rgba(15, 21, 38, 0.8);
   border: 4px solid var(--acc);
   box-shadow: 10px 10px 0 var(--shade);
   padding: 32px;
   margin-bottom: 48px;
   position: relative;
   align-items: start;
+  transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1),
+              border-color 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+.reg-featured-card:hover {
+  border-color: #739eff;
+  transform: translateY(-4px);
+  box-shadow: 10px 14px 0 var(--shade), 0 0 24px rgba(91, 140, 255, 0.25);
+}
+
+.reg-official-poster-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 4.2;
+  padding: 28px 16px;
+  background: radial-gradient(circle at center, rgba(91, 140, 255, 0.15) 0%, rgba(8, 11, 22, 0.95) 75%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.reg-official-art {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 1;
+}
+
+.reg-official-glow {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(91, 140, 255, 0.35) 0%, transparent 70%);
+  filter: blur(16px);
+  pointer-events: none;
+  animation: pulse-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  100% { transform: scale(1.15); opacity: 0.9; }
+}
+
+.reg-official-logo {
+  width: 130px;
+  height: 130px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
+  display: block;
+}
+
+.reg-featured-card:hover .reg-official-logo {
+  transform: scale(1.06) rotate(-1deg);
+}
+
+.reg-official-badge-pixel {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.52rem;
+  color: var(--acc);
+  padding: 6px 10px;
+  background: rgba(91, 140, 255, 0.1);
+  border: 1px dashed var(--acc);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .reg-poster-box {
@@ -194,6 +266,48 @@
   align-items: center;
   gap: 10px;
   text-decoration: none;
+}
+
+.reg-google-form-pill {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: #00ffcc;
+  background: rgba(0, 255, 204, 0.08);
+  border: 2px solid rgba(0, 255, 204, 0.6);
+  padding: 6px 10px;
+  line-height: 1;
+  letter-spacing: 0.03em;
+}
+
+.reg-btn-official {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.78rem;
+  padding: 18px 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-decoration: none;
+  background: var(--acc);
+  color: #080b16;
+  font-weight: 700;
+  border: 3px solid var(--acc);
+  box-shadow: 4px 4px 0 var(--shade);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+}
+
+.reg-btn-official:hover {
+  background: #739eff;
+  border-color: #739eff;
+  color: #080b16;
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--shade), 0 0 20px rgba(91, 140, 255, 0.4);
+}
+
+.reg-btn-official:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--shade);
 }
 
 /* Secondary Open Events Grid */
@@ -882,6 +996,10 @@
     gap: 24px;
     padding: 24px;
   }
+  .reg-official-poster-box {
+    aspect-ratio: auto;
+    padding: 24px 16px;
+  }
   .reg-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -901,6 +1019,13 @@
     padding: 18px;
     border-width: 3px;
     box-shadow: 6px 6px 0 var(--shade);
+  }
+  .reg-official-poster-box {
+    padding: 18px 12px;
+  }
+  .reg-official-logo {
+    width: 90px;
+    height: 90px;
   }
   .reg-grid {
     grid-template-columns: 1fr;
@@ -936,10 +1061,14 @@
     flex-direction: column;
     align-items: stretch;
   }
-  .reg-btn-main, .reg-btn-sec {
+  .reg-btn-main, .reg-btn-sec, .reg-btn-official {
     width: 100%;
     justify-content: center;
     text-align: center;
+  }
+  .reg-btn-official {
+    font-size: 0.68rem;
+    padding: 16px 20px;
   }
   .reg-contact-brand-logo {
     margin-top: 36px;
@@ -1002,4 +1131,201 @@
     transform: none !important;
   }
 }
+
+/* Domain-Wise Recruitment Tasks Section */
+.reg-btn-task-hero {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.78rem;
+  padding: 18px 26px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  background: rgba(91, 140, 255, 0.1);
+  color: var(--acc);
+  font-weight: 700;
+  border: 3px solid var(--acc);
+  box-shadow: 4px 4px 0 var(--shade);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  cursor: pointer;
+}
+
+.reg-btn-task-hero:hover {
+  background: rgba(91, 140, 255, 0.22);
+  border-color: #739eff;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 6px 6px 0 var(--shade), 0 0 20px rgba(91, 140, 255, 0.35);
+}
+
+.reg-btn-task-hero:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--shade);
+}
+
+.reg-selected-domain-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(91, 140, 255, 0.12);
+  border: 2px dashed var(--acc);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: var(--acc);
+  margin-top: 6px;
+}
+
+.reg-clear-domain-btn {
+  background: transparent;
+  border: none;
+  color: #ff5555;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  padding: 0 4px;
+}
+
+.reg-tasks-section {
+  margin-top: 56px;
+  margin-bottom: 64px;
+  padding-top: 40px;
+  border-top: 4px solid var(--line);
+}
+
+.reg-tasks-master-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 18px;
+  background: rgba(15, 21, 38, 0.7);
+  border: 2px solid var(--line);
+  margin: -12px 0 28px;
+  font-size: 1.35rem;
+}
+
+.reg-master-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: var(--dim);
+}
+
+.reg-master-link {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.62rem;
+  color: var(--acc);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s ease;
+}
+
+.reg-master-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* 3 cards per row on desktop */
+.reg-tasks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.reg-task-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 2.5vw, 26px);
+  height: 100%;
+  min-height: 280px;
+  background: rgba(15, 21, 38, 0.75);
+  border: 3px solid var(--line);
+  box-shadow: 6px 6px 0 var(--shade);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.reg-task-card:hover {
+  border-color: var(--acc);
+  transform: translateY(-4px);
+  box-shadow: 6px 10px 0 var(--shade), 0 0 20px rgba(91, 140, 255, 0.25);
+  background: rgba(15, 21, 38, 0.95);
+}
+
+.reg-task-card.selected {
+  border-color: var(--acc);
+  box-shadow: 6px 6px 0 var(--shade), 0 0 24px rgba(91, 140, 255, 0.4);
+}
+
+.reg-task-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.reg-task-num {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.54rem;
+  color: var(--dim);
+  letter-spacing: 0.04em;
+}
+
+.reg-task-title {
+  font-family: 'Press Start 2P', monospace;
+  font-weight: 400;
+  font-size: clamp(0.72rem, 1.3vw, 0.85rem);
+  line-height: 1.5;
+  color: var(--acc);
+  margin: 0 0 12px;
+  letter-spacing: -0.02em;
+}
+
+.reg-task-desc {
+  color: var(--dim);
+  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
+  line-height: 1.35;
+  margin: 0 0 24px;
+}
+
+.reg-task-btn {
+  margin-top: auto;
+  font-size: 0.62rem;
+  padding: 12px 18px;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+}
+
+.reg-task-btn-disabled {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: var(--line) !important;
+  color: var(--dim) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Tablet: 2 cards per row */
+@media (max-width: 1023px) {
+  .reg-tasks-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* Mobile: 1 card per row */
+@media (max-width: 640px) {
+  .reg-tasks-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .reg-task-card {
+    min-height: auto;
+  }
+}
+
 

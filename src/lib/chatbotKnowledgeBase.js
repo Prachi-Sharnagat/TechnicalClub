@@ -52,19 +52,21 @@ We bring together passionate coders, makers, designers, and innovators. Our comm
   domains: {
     id: 'technical-domains',
     title: 'Our Technical Domains',
-    summary: `Technical Club is organized into five specialized core domains:
+    summary: `Technical Club is organized into six specialized core domains:
 
 1. 🌐 Web Development — Building modern responsive web applications, frontend architectures with React, APIs, and full-stack solutions.
 2. 🎨 Graphics & Design — Creative visual storytelling, UI/UX prototyping, event branding, posters, and motion design.
 3. ⚡ Electronics & Robotics — Hardware prototyping, Arduino, microcontrollers, embedded systems, and competitive robotics.
 4. 🎬 Video Editing — Cinematic visual editing, DaVinci Resolve workflows, motion graphics, and creative event media.
-5. 📢 Publicity — Social media, event promotion, outreach, branding and spreading awareness about club activities.`,
+5. 📢 Publicity — Social media, event promotion, outreach, branding and spreading awareness about club activities.
+6. 🧊 3D Modelling — 3D asset creation, digital modelling, rendering workflows, and spatial visualization.`,
     actions: [
       { label: 'WEB DEV DOMAIN', path: '/domains/web-dev', isInternal: true },
       { label: 'GRAPHICS DOMAIN', path: '/domains/graphics', isInternal: true },
       { label: 'ELECTRONICS DOMAIN', path: '/domains/electronics', isInternal: true },
       { label: 'VIDEO EDITING', path: '/domains/video-editing', isInternal: true },
-      { label: 'PUBLICITY DOMAIN', path: '/domains/publicity', isInternal: true }
+      { label: 'PUBLICITY DOMAIN', path: '/domains/publicity', isInternal: true },
+      { label: '3D MODELLING', path: '/domains/3d-modelling', isInternal: true }
     ],
     followUps: ['What is Robo Drive?', 'What projects do we work on?', 'How can I join the club?']
   },
@@ -75,7 +77,7 @@ We bring together passionate coders, makers, designers, and innovators. Our comm
     summary: `We organize high-impact technical events across three categories:
 
 • ONGOING:
-- ROBO DRIVE — High-speed RC car obstacle course racing (22 October 2026, Digital Tower). Registration is currently open!
+- No live events running today. Stay tuned for our next arena announcement!
 
 • UPCOMING:
 - Web Dev Workshop — Hands-on responsive web creation.
@@ -83,12 +85,13 @@ We bring together passionate coders, makers, designers, and innovators. Our comm
 - Project Demo Day — Showcase innovations and receive club feedback.
 
 • PAST HIGHLIGHTS:
+- ROBO DRIVE — High-speed RC car obstacle course racing (22 October 2026, Digital Tower). Concluded successfully!
 - Marvel Assemble: GrandMaster's Jeopardy — Marvel trivia quiz battle (Completed).
 - Robo Mania — 3-round robotics tournament with Kaun Banega Robopati & Robo Soccer.
 - Shinobi Showdown — Online competitive coding contest with Coding Ninjas.`,
     actions: [
       { label: 'VIEW ALL EVENTS', path: '/events', isInternal: true },
-      { label: 'ROBO DRIVE INFO', path: '/events?tab=ongoing', isInternal: true }
+      { label: 'PAST HIGHLIGHTS', path: '/events?tab=past', isInternal: true }
     ],
     followUps: ['What is Robo Drive?', 'Where can I find event registrations?', 'How can I join the club?']
   },
@@ -102,16 +105,16 @@ We bring together passionate coders, makers, designers, and innovators. Our comm
 • Date: 22 October 2026
 • Time: 10:00 AM onwards
 • Venue: Digital Tower, Ground Floor Common Area (near Lift 4)
-• What it is: A premier robotics contest where participants pilot high-performance RC cars engineered by Technical Club through a custom obstacle arena with speed runs and precision challenges. Bots are provided by the club!
+• What it is: A premier robotics contest where participants piloted high-performance RC cars engineered by Technical Club through a custom obstacle arena with speed runs and precision challenges. Bots were provided by the club!
 
-Registration is currently open via the official Google Form.`,
+Status: Event successfully concluded! View the official poster and highlights in our Past Events gallery.`,
     actions: [
+      { label: 'VIEW ROBO DRIVE POSTER', path: '/events?tab=past', isInternal: true },
       {
-        label: 'OPEN REGISTRATION FORM',
+        label: 'ROBO DRIVE GOOGLE FORM',
         url: 'https://docs.google.com/forms/d/e/1FAIpQLSfice9Ifzg7YpWEtqGTf3QvIVXtpg9M4_yfXXg_Y2Iv2dfFCw/viewform',
         isInternal: false
-      },
-      { label: 'VIEW ROBO DRIVE POSTER', path: '/events?tab=ongoing', isInternal: true }
+      }
     ],
     followUps: ['Where can I find event registrations?', 'What are our technical domains?', 'How can I contact the club?']
   },
@@ -155,23 +158,19 @@ How to get involved:
     title: 'Event Registrations',
     summary: `Here is the current registration status:
 
-1. ROBO DRIVE (22 Oct 2026):
-   Status: 🟢 REGISTRATION OPEN
-   Venue: Digital Tower, Ground Floor Common Area
-   You can register directly through our official Google Form or the modal on the Events page.
-
-2. Workshops & Hackathons (Web Dev Workshop, Hack Night, Demo Day):
+1. Workshops & Hackathons (Web Dev Workshop, Hack Night, Demo Day):
    Status: 🟡 OPEN VIA INTERNAL PORTAL (/register)
 
-Past events like Marvel Assemble: Jeopardy are completed and no longer accepting entries.`,
+2. Past Events:
+   ROBO DRIVE (22 Oct 2026) and Marvel Assemble: Jeopardy are completed and entries are closed. Check the Events tab to see highlights!`,
     actions: [
+      { label: 'INTERNAL REGISTER PAGE', path: '/register', isInternal: true },
+      { label: 'PAST EVENTS GALLERY', path: '/events?tab=past', isInternal: true },
       {
         label: 'ROBO DRIVE GOOGLE FORM',
         url: 'https://docs.google.com/forms/d/e/1FAIpQLSfice9Ifzg7YpWEtqGTf3QvIVXtpg9M4_yfXXg_Y2Iv2dfFCw/viewform',
         isInternal: false
-      },
-      { label: 'INTERNAL REGISTER PAGE', path: '/register', isInternal: true },
-      { label: 'EVENTS HUB', path: '/events', isInternal: true }
+      }
     ],
     followUps: ['What is Robo Drive?', 'What events do we organize?', 'How can I contact the club?']
   },
@@ -248,7 +247,7 @@ Feel free to connect for event inquiries, project collaborations, or general que
     summary: `I didn't quite catch that question! 🤖 As TC-BOT, I can help you with:
 
 • Who we are and our club mission
-• Our technical domains (Web Dev, Graphics, Electronics, Video, Publicity)
+• Our technical domains (Web Dev, Graphics, Electronics, Video, Publicity, 3D Modelling)
 • Ongoing events like Robo Drive
 • Upcoming hackathons and workshops
 • How to join or register

@@ -18,7 +18,16 @@ export default function WebDevPage() {
         <Section id="build" title="What we build">
           <div className="tags">{WEBDEV.projects.map((t) => <span key={t}>{t}</span>)}</div>
         </Section>
-        <Banner title="Ready to write your first line?" text="No experience needed. Bring a laptop and curiosity." cta={{ label: 'JOIN WEB DEV', href: '/register' }} />
+        <Banner
+          title="Ready to write your first line?"
+          text="No experience needed. Bring a laptop and curiosity."
+          cta={{
+            label: 'JOIN WEB DEV',
+            href: '/web-dev-guide.pdf',
+            target: '_blank',
+            rel: 'noopener noreferrer'
+          }}
+        />
       </div>
       {stage !== 'gone' && (
         <motion.div className="overlay" initial={{ y: '0%' }} animate={{ y: stage === 'reveal' ? '-100%' : '0%' }} transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}>
