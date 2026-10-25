@@ -2,10 +2,41 @@
 
 .reg-page-container {
   min-height: calc(100vh - 68px);
-  padding: clamp(24px, 4vw, 40px) 0 clamp(90px, 14vh, 120px);
+  padding-top: clamp(24px, 4vw, 40px);
+  padding-bottom: clamp(90px, 14vh, 120px);
+  padding-left: 24px;
+  padding-right: 24px;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+}
+
+@media (max-width: 374px) {
+  .reg-page-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 479px) {
+  .reg-page-container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .reg-page-container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .reg-page-container {
+    padding-left: clamp(24px, 3.2vw, 36px);
+    padding-right: clamp(24px, 3.2vw, 36px);
+  }
 }
 
 .reg-header-block {
@@ -1101,7 +1132,8 @@
 
 @media (max-width: 767px) {
   .reg-page-container {
-    padding: 20px 0 clamp(90px, 14vh, 120px);
+    padding-top: 20px;
+    padding-bottom: clamp(90px, 14vh, 120px);
   }
   .reg-featured-card {
     display: flex;
@@ -1115,7 +1147,7 @@
     max-width: 100%;
     box-sizing: border-box;
   }
-  /* Display the recruitment domains artwork banner at the top of the card on mobile */
+  /* Display the recruitment domains artwork banner cleanly at the top of the card on mobile */
   .reg-poster-box {
     display: flex;
     flex-direction: column;
@@ -1133,24 +1165,17 @@
     background: #080b16;
   }
   .reg-mobile-logo-wrap {
-    display: none;
+    display: none !important;
   }
+  /* Remove logo overlay from mobile screen so the domains artwork is completely clear */
   .reg-official-art {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    z-index: 4;
+    display: none !important;
   }
   .reg-official-glow {
-    display: none;
+    display: none !important;
   }
   .reg-official-logo {
-    width: 44px;
-    height: 44px;
-    padding: 3px;
-    border-radius: 4px;
-    border: 2px solid var(--acc);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(91, 140, 255, 0.5);
+    display: none !important;
   }
   .reg-badge-row {
     justify-content: center;
@@ -1241,6 +1266,10 @@
     padding: 16px 14px;
     box-shadow: 3px 3px 0 var(--shade);
     gap: 12px;
+  }
+  .reg-poster-box {
+    max-height: 190px;
+    min-height: 140px;
   }
   .reg-mobile-logo {
     width: 90px;
