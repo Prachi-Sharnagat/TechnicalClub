@@ -520,7 +520,7 @@
 
 @media (max-width: 374px) {
   .orbit-page {
-    --s: 280px;
+    --s: clamp(230px, 78vw, 260px);
   }
   .orbit-roster-grid {
     grid-template-columns: 1fr;

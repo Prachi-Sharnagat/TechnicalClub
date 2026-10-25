@@ -2,7 +2,10 @@
 
 .reg-page-container {
   min-height: calc(100vh - 68px);
-  padding: 40px 0 80px;
+  padding: clamp(24px, 4vw, 40px) 0 clamp(90px, 14vh, 120px);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .reg-header-block {
@@ -20,15 +23,18 @@
 /* Featured Event Showcase & Official Registration Card */
 .reg-featured-card {
   display: grid;
-  grid-template-columns: 360px 1fr;
-  gap: 36px;
-  background: rgba(15, 21, 38, 0.8);
+  grid-template-columns: 380px 1fr;
+  gap: 32px;
+  background: rgba(15, 21, 38, 0.85);
   border: 4px solid var(--acc);
-  box-shadow: 10px 10px 0 var(--shade);
-  padding: 32px;
+  box-shadow: 8px 8px 0 var(--shade);
+  padding: 28px;
   margin-bottom: 48px;
   position: relative;
-  align-items: start;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   transition: transform 0.25s cubic-bezier(0.2, 0, 0, 1),
               border-color 0.25s ease,
               box-shadow 0.25s ease;
@@ -36,8 +42,8 @@
 
 .reg-featured-card:hover {
   border-color: #739eff;
-  transform: translateY(-4px);
-  box-shadow: 10px 14px 0 var(--shade), 0 0 24px rgba(91, 140, 255, 0.25);
+  transform: translateY(-3px);
+  box-shadow: 8px 12px 0 var(--shade), 0 0 24px rgba(91, 140, 255, 0.25);
 }
 
 .reg-official-poster-box {
@@ -45,12 +51,72 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 4 / 4.2;
-  padding: 28px 16px;
+  min-height: 280px;
+  aspect-ratio: 4 / 3.4;
   background: radial-gradient(circle at center, rgba(91, 140, 255, 0.15) 0%, rgba(8, 11, 22, 0.95) 75%);
   position: relative;
   overflow: hidden;
   text-align: center;
+  border: 3px solid var(--line);
+  box-shadow: 4px 4px 0 var(--shade);
+}
+
+/* Viewfinder brackets for decorative poster box */
+.reg-official-poster-box::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  z-index: 3;
+  border: 1px solid rgba(91, 140, 255, 0.3);
+  background:
+    linear-gradient(var(--acc), var(--acc)) top left / 10px 2px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) top left / 2px 10px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) top right / 10px 2px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) top right / 2px 10px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) bottom left / 10px 2px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) bottom left / 2px 10px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) bottom right / 10px 2px no-repeat,
+    linear-gradient(var(--acc), var(--acc)) bottom right / 2px 10px no-repeat;
+}
+
+.reg-decorative-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.reg-decorative-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.95;
+  filter: contrast(1.1) brightness(0.95);
+  transition: transform 0.4s ease, opacity 0.3s ease;
+  display: block;
+}
+
+.reg-featured-card:hover .reg-decorative-img {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+.reg-decorative-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(8, 11, 22, 0.2) 0%, rgba(8, 11, 22, 0.45) 100%);
+  pointer-events: none;
+}
+
+.reg-decorative-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(transparent 0 3px, rgba(0, 0, 0, 0.24) 3px 4px);
+  pointer-events: none;
 }
 
 .reg-official-art {
@@ -58,17 +124,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  z-index: 1;
+  z-index: 2;
+  position: relative;
 }
 
 .reg-official-glow {
   position: absolute;
-  width: 140px;
-  height: 140px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(91, 140, 255, 0.35) 0%, transparent 70%);
-  filter: blur(16px);
+  background: radial-gradient(circle, rgba(91, 140, 255, 0.45) 0%, transparent 70%);
+  filter: blur(14px);
   pointer-events: none;
   animation: pulse-glow 3s ease-in-out infinite alternate;
 }
@@ -79,16 +145,37 @@
 }
 
 .reg-official-logo {
-  width: 130px;
-  height: 130px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
-  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.6));
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 6px;
+  border: 3px solid var(--acc);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 16px rgba(91, 140, 255, 0.35);
   transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1);
   display: block;
 }
 
 .reg-featured-card:hover .reg-official-logo {
   transform: scale(1.06) rotate(-1deg);
+}
+
+.reg-mobile-logo-wrap {
+  display: none;
+}
+
+.reg-mobile-logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 6px;
+  border: 3px solid var(--acc);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 14px rgba(91, 140, 255, 0.3);
+  display: block;
+  margin: 0 auto;
 }
 
 .reg-official-badge-pixel {
@@ -193,9 +280,9 @@
 
 .reg-event-title {
   font-family: 'Press Start 2P', monospace;
-  font-size: clamp(1.1rem, 3.6vw, 2.2rem);
+  font-size: clamp(0.98rem, 2.5vw, 1.85rem);
   color: var(--ink);
-  line-height: 1.3;
+  line-height: 1.45;
   margin: 0;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -203,14 +290,14 @@
 
 .reg-tagline {
   color: var(--acc);
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   margin: 0;
   line-height: 1.25;
 }
 
 .reg-description {
   color: var(--dim);
-  font-size: 1.45rem;
+  font-size: clamp(1.25rem, 1.8vw, 1.45rem);
   line-height: 1.35;
   margin: 0;
 }
@@ -218,11 +305,11 @@
 .reg-meta-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin: 8px 0;
-  padding: 16px;
+  gap: 12px;
+  margin: 4px 0;
+  padding: 12px 14px;
   background: var(--bg);
-  border: 3px solid var(--line);
+  border: 2px solid var(--line);
 }
 
 .reg-meta-item {
@@ -992,13 +1079,14 @@
 /* Responsive adjustments */
 @media (max-width: 1023px) {
   .reg-featured-card {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 24px;
+    grid-template-columns: 320px 1fr;
+    gap: 22px;
+    padding: 22px;
   }
   .reg-official-poster-box {
     aspect-ratio: auto;
-    padding: 24px 16px;
+    min-height: 240px;
+    padding: 20px 14px;
   }
   .reg-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1013,19 +1101,105 @@
 
 @media (max-width: 767px) {
   .reg-page-container {
-    padding: 24px 0 60px;
+    padding: 20px 0 clamp(90px, 14vh, 120px);
   }
   .reg-featured-card {
-    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(20px, 4.5vw, 28px) clamp(16px, 4vw, 24px);
     border-width: 3px;
-    box-shadow: 6px 6px 0 var(--shade);
+    box-shadow: 4px 4px 0 var(--shade);
+    gap: 16px;
+    margin-bottom: 36px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
-  .reg-official-poster-box {
-    padding: 18px 12px;
+  /* Display the recruitment domains artwork banner at the top of the card on mobile */
+  .reg-poster-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 220px;
+    min-height: 160px;
+    border: 3px solid var(--line);
+    box-shadow: 4px 4px 0 var(--shade);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 6px;
+    background: #080b16;
+  }
+  .reg-mobile-logo-wrap {
+    display: none;
+  }
+  .reg-official-art {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 4;
+  }
+  .reg-official-glow {
+    display: none;
   }
   .reg-official-logo {
-    width: 90px;
-    height: 90px;
+    width: 44px;
+    height: 44px;
+    padding: 3px;
+    border-radius: 4px;
+    border: 2px solid var(--acc);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 10px rgba(91, 140, 255, 0.5);
+  }
+  .reg-badge-row {
+    justify-content: center;
+    gap: 8px;
+  }
+  .reg-event-title {
+    font-size: clamp(0.92rem, 3.4vw, 1.35rem);
+    text-align: center;
+    line-height: 1.45;
+  }
+  .reg-description {
+    font-size: 1.35rem;
+    text-align: center;
+    line-height: 1.3;
+    margin: 0;
+  }
+  /* Compact mobile meta strip */
+  .reg-meta-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 12px;
+    margin: 2px 0;
+    grid-template-columns: 1fr;
+  }
+  .reg-meta-item {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .reg-meta-val {
+    font-size: 1.25rem;
+  }
+  .reg-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .reg-btn-main, .reg-btn-sec, .reg-btn-official, .reg-btn-task-hero {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    min-height: 44px;
+    font-size: 0.65rem;
+    padding: 14px 16px;
+    box-sizing: border-box;
   }
   .reg-grid {
     grid-template-columns: 1fr;
@@ -1054,22 +1228,6 @@
     padding: 16px 18px;
     font-size: 0.65rem;
   }
-  .reg-meta-list {
-    grid-template-columns: 1fr;
-  }
-  .reg-actions-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .reg-btn-main, .reg-btn-sec, .reg-btn-official {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-  .reg-btn-official {
-    font-size: 0.68rem;
-    padding: 16px 20px;
-  }
   .reg-contact-brand-logo {
     margin-top: 36px;
   }
@@ -1080,7 +1238,23 @@
 
 @media (max-width: 374px) {
   .reg-featured-card {
-    padding: 14px;
+    padding: 16px 14px;
+    box-shadow: 3px 3px 0 var(--shade);
+    gap: 12px;
+  }
+  .reg-mobile-logo {
+    width: 90px;
+    height: 90px;
+  }
+  .reg-event-title {
+    font-size: 0.85rem;
+  }
+  .reg-description {
+    font-size: 1.25rem;
+  }
+  .reg-btn-main, .reg-btn-task-hero {
+    padding: 12px 10px;
+    font-size: 0.58rem;
   }
   .reg-contact-card {
     padding: 14px;
@@ -1103,10 +1277,6 @@
   .collab-submit-btn {
     padding: 14px 12px;
     font-size: 0.58rem;
-  }
-  .reg-btn-main {
-    padding: 14px 16px;
-    font-size: 0.62rem;
   }
   .reg-contact-btn {
     padding: 12px 14px;
@@ -1198,29 +1368,35 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
   flex-wrap: wrap;
-  padding: 12px 18px;
+  padding: 12px 16px;
   background: rgba(15, 21, 38, 0.7);
   border: 2px solid var(--line);
   margin: -12px 0 28px;
   font-size: 1.35rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .reg-master-label {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.6rem;
+  font-size: clamp(0.52rem, 1.3vw, 0.6rem);
   color: var(--dim);
 }
 
 .reg-master-link {
   font-family: 'Press Start 2P', monospace;
-  font-size: 0.62rem;
+  font-size: clamp(0.52rem, 1.3vw, 0.62rem);
   color: var(--acc);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
   transition: color 0.15s ease;
 }
 
